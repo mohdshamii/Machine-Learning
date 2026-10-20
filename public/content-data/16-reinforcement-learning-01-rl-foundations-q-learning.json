@@ -1,0 +1,85 @@
+{
+  "id": "16-reinforcement-learning-01-rl-foundations-q-learning",
+  "title": "Reinforcement Learning: MDPs, Bellman Equations & Q-Learning",
+  "subjectId": "16-Reinforcement-Learning",
+  "format": "markdown",
+  "fileName": "01-rl-foundations-q-learning.md",
+  "relativePath": "content/16-Reinforcement-Learning/01-rl-foundations-q-learning.md",
+  "difficulty": "Advanced",
+  "tags": [
+    "reinforcement-learning",
+    "mdp",
+    "bellman-equation",
+    "q-learning",
+    "exploration-exploitation"
+  ],
+  "prerequisites": [
+    "01-Mathematics",
+    "02-Statistics-and-Probability"
+  ],
+  "description": "Foundational Reinforcement Learning: Markov Decision Processes (MDP), value functions, Bellman equations, and tabular Q-Learning.",
+  "estimatedMinutes": 2,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Reinforcement Learning: Foundations to Q-Learning",
+      "id": "reinforcement-learning-foundations-to-q-learning"
+    },
+    {
+      "level": 2,
+      "title": "1. The Markov Decision Process (MDP)",
+      "id": "1-the-markov-decision-process-mdp"
+    },
+    {
+      "level": 3,
+      "title": "The Markov Property",
+      "id": "the-markov-property"
+    },
+    {
+      "level": 2,
+      "title": "2. The Bellman Optimality Equations",
+      "id": "2-the-bellman-optimality-equations"
+    },
+    {
+      "level": 2,
+      "title": "3. Tabular Q-Learning Algorithm",
+      "id": "3-tabular-q-learning-algorithm"
+    },
+    {
+      "level": 3,
+      "title": "Update Rule",
+      "id": "update-rule"
+    },
+    {
+      "level": 1,
+      "title": "Q-Table initialization",
+      "id": "q-table-initialization"
+    },
+    {
+      "level": 1,
+      "title": "Epsilon-greedy exploration",
+      "id": "epsilon-greedy-exploration"
+    }
+  ],
+  "searchTokens": "Reinforcement Learning: MDPs, Bellman Equations & Q-Learning Foundational Reinforcement Learning: Markov Decision Processes (MDP), value functions, Bellman equations, and tabular Q-Learning. reinforcement-learning mdp bellman-equation q-learning exploration-exploitation \n\n# Reinforcement Learning: Foundations to Q-Learning\n\nReinforcement Learning (RL) studies how an autonomous agent learns to make sequential decisions by interacting with an environment to maximize cumulative scalar rewards.\n\n---\n\n## 1. The Markov Decision Process (MDP)\n\nAn MDP is defined by the 5-tuple $(\\mathcal{S}, \\mathcal{A}, \\mathcal{P}, \\mathcal{R}, \\gamma)$:\n- $\\mathcal{S}$: Set of states.\n- $\\mathcal{A}$: Set of actions.\n- $\\mathcal{P}(s' \\mid s, a)$: Transition probability function $P(S_{t+1} = s' \\mid S_t = s, A_t = a)$.\n- $\\mathcal{R}(s, a, s')$: Reward function received when transitioning from $s$ to $s'$ via $a$.\n- $\\gamma \\in [0, 1)$: Discount factor balancing immediate vs future rewards.\n\n### The Markov Property\n*\"The future is independent of the past, given the present\":*\n$$P(S_{t+1} \\mid S_t, A_t, S_{t-1}, A_{t-1}, \\dots) = P(S_{t+1} \\mid S_t, A_t)$$\n\n---\n\n## 2. The Bellman Optimality Equations\n\nThe action-value function $Q^*(s, a)$ represents the expected cumulative discounted return starting from state $s$, taking action $a$, and following the optimal policy thereafter:\n\n$$Q^*(s, a) = \\mathbb{E}\\left[ R_{t+1} + \\gamma \\max_{a'} Q^*(S_{t+1}, a') \\;\\middle|\\; S_t = s, A_t = a \\right]$$\n\n---\n\n## 3. Tabular Q-Learning Algorithm\n\nQ-Learning is a **model-free**, **off-policy** Temporal Difference (TD) control algorithm.\n\n### Update Rule\n$$Q(s, a) \\leftarrow Q(s, a) + \\alpha \\left[ r + \\gamma \\max_{a'} Q(s', a') - Q(s, a) \\right]$$\n\nWhere:\n- $\\alpha \\in (0, 1]$ i",
+  "hasNotebook": false,
+  "sizeBytes": 2777,
+  "content": "\n\n# Reinforcement Learning: Foundations to Q-Learning\n\nReinforcement Learning (RL) studies how an autonomous agent learns to make sequential decisions by interacting with an environment to maximize cumulative scalar rewards.\n\n---\n\n## 1. The Markov Decision Process (MDP)\n\nAn MDP is defined by the 5-tuple $(\\mathcal{S}, \\mathcal{A}, \\mathcal{P}, \\mathcal{R}, \\gamma)$:\n- $\\mathcal{S}$: Set of states.\n- $\\mathcal{A}$: Set of actions.\n- $\\mathcal{P}(s' \\mid s, a)$: Transition probability function $P(S_{t+1} = s' \\mid S_t = s, A_t = a)$.\n- $\\mathcal{R}(s, a, s')$: Reward function received when transitioning from $s$ to $s'$ via $a$.\n- $\\gamma \\in [0, 1)$: Discount factor balancing immediate vs future rewards.\n\n### The Markov Property\n*\"The future is independent of the past, given the present\":*\n$$P(S_{t+1} \\mid S_t, A_t, S_{t-1}, A_{t-1}, \\dots) = P(S_{t+1} \\mid S_t, A_t)$$\n\n---\n\n## 2. The Bellman Optimality Equations\n\nThe action-value function $Q^*(s, a)$ represents the expected cumulative discounted return starting from state $s$, taking action $a$, and following the optimal policy thereafter:\n\n$$Q^*(s, a) = \\mathbb{E}\\left[ R_{t+1} + \\gamma \\max_{a'} Q^*(S_{t+1}, a') \\;\\middle|\\; S_t = s, A_t = a \\right]$$\n\n---\n\n## 3. Tabular Q-Learning Algorithm\n\nQ-Learning is a **model-free**, **off-policy** Temporal Difference (TD) control algorithm.\n\n### Update Rule\n$$Q(s, a) \\leftarrow Q(s, a) + \\alpha \\left[ r + \\gamma \\max_{a'} Q(s', a') - Q(s, a) \\right]$$\n\nWhere:\n- $\\alpha \\in (0, 1]$ is the learning rate.\n- $r + \\gamma \\max_{a'} Q(s', a')$ is the **TD Target**.\n- $[r + \\gamma \\max_{a'} Q(s', a') - Q(s, a)]$ is the **TD Error**.\n\n```python\nimport numpy as np\n\n# Q-Table initialization\nn_states = 10\nn_actions = 4\nQ = np.zeros((n_states, n_actions))\n\nalpha = 0.1   # learning rate\ngamma = 0.95  # discount factor\nepsilon = 0.2 # exploration rate\n\ndef choose_action(state):\n    # Epsilon-greedy exploration\n    if np.random.uniform(0, 1) < epsilon:\n        return np.random.choice(n_actions) # explore\n    return np.argmax(Q[state, :])           # exploit\n\ndef update_q(state, action, reward, next_state):\n    best_next_action = np.argmax(Q[next_state, :])\n    td_target = reward + gamma * Q[next_state, best_next_action]\n    td_error = td_target - Q[state, action]\n    Q[state, action] += alpha * td_error\n```\n",
+  "frontmatter": {
+    "title": "Reinforcement Learning: MDPs, Bellman Equations & Q-Learning",
+    "subject": "16-Reinforcement-Learning",
+    "difficulty": "Advanced",
+    "tags": [
+      "reinforcement-learning",
+      "mdp",
+      "bellman-equation",
+      "q-learning",
+      "exploration-exploitation"
+    ],
+    "prerequisites": [
+      "01-Mathematics",
+      "02-Statistics-and-Probability"
+    ],
+    "description": "Foundational Reinforcement Learning: Markov Decision Processes (MDP), value functions, Bellman equations, and tabular Q-Learning."
+  }
+}

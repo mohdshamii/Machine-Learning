@@ -1,0 +1,118 @@
+{
+  "id": "04-data-preprocessing-01-data-preprocessing-pipeline",
+  "title": "Data Preprocessing: Cleaning, Imputation & Encoding Pipeline",
+  "subjectId": "04-Data-Preprocessing",
+  "format": "markdown",
+  "fileName": "01-data-preprocessing-pipeline.md",
+  "relativePath": "content/04-Data-Preprocessing/01-data-preprocessing-pipeline.md",
+  "difficulty": "Beginner",
+  "tags": [
+    "data-cleaning",
+    "imputation",
+    "categorical-encoding",
+    "outliers",
+    "pipelines"
+  ],
+  "prerequisites": [
+    "03-Data-Analysis"
+  ],
+  "description": "A comprehensive production-grade data preprocessing pipeline: strategies for handling missing values, encoding categorical variables, detecting outliers, and building scikit-learn ColumnTransformers.",
+  "estimatedMinutes": 3,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Data Preprocessing: Cleaning, Imputation & Encoding",
+      "id": "data-preprocessing-cleaning-imputation-encoding"
+    },
+    {
+      "level": 2,
+      "title": "1. Handling Missing Data (Imputation Strategies)",
+      "id": "1-handling-missing-data-imputation-strategies"
+    },
+    {
+      "level": 1,
+      "title": "Numerical Imputation: Median is robust to outliers",
+      "id": "numerical-imputation-median-is-robust-to-outliers"
+    },
+    {
+      "level": 1,
+      "title": "Categorical Imputation: Most frequent or explicit 'Unknown' token",
+      "id": "categorical-imputation-most-frequent-or-explicit-unknown-token"
+    },
+    {
+      "level": 1,
+      "title": "Advanced Multi-Variate Imputation using K-Nearest Neighbors",
+      "id": "advanced-multi-variate-imputation-using-k-nearest-neighbors"
+    },
+    {
+      "level": 2,
+      "title": "2. Categorical Variable Encoding",
+      "id": "2-categorical-variable-encoding"
+    },
+    {
+      "level": 1,
+      "title": "Avoid multicollinearity (Dummy Variable Trap) by dropping first column",
+      "id": "avoid-multicollinearity-dummy-variable-trap-by-dropping-first-column"
+    },
+    {
+      "level": 2,
+      "title": "3. Outlier Detection & Treatment",
+      "id": "3-outlier-detection-treatment"
+    },
+    {
+      "level": 3,
+      "title": "Interquartile Range (IQR) Method",
+      "id": "interquartile-range-iqr-method"
+    },
+    {
+      "level": 3,
+      "title": "Winsorization (Capping)",
+      "id": "winsorization-capping"
+    },
+    {
+      "level": 2,
+      "title": "4. End-to-End Scikit-Learn ColumnTransformer",
+      "id": "4-end-to-end-scikit-learn-columntransformer"
+    },
+    {
+      "level": 1,
+      "title": "Numeric sub-pipeline",
+      "id": "numeric-sub-pipeline"
+    },
+    {
+      "level": 1,
+      "title": "Categorical sub-pipeline",
+      "id": "categorical-sub-pipeline"
+    },
+    {
+      "level": 1,
+      "title": "Combine into master preprocessor",
+      "id": "combine-into-master-preprocessor"
+    },
+    {
+      "level": 2,
+      "title": "5. Lab Reference",
+      "id": "5-lab-reference"
+    }
+  ],
+  "searchTokens": "Data Preprocessing: Cleaning, Imputation & Encoding Pipeline A comprehensive production-grade data preprocessing pipeline: strategies for handling missing values, encoding categorical variables, detecting outliers, and building scikit-learn ColumnTransformers. data-cleaning imputation categorical-encoding outliers pipelines \n\n# Data Preprocessing: Cleaning, Imputation & Encoding\n\nReal-world datasets are messy, incomplete, and noisy. Model performance is capped by data quality: *\"Garbage In, Garbage Out\"*. This guide establishes a systematic, reproducible workflow for preprocessing raw tabular features before machine learning.\n\n---\n\n## 1. Handling Missing Data (Imputation Strategies)\n\nMissing data mechanisms fall into three categories:\n1. **MCAR (Missing Completely at Random)**: Missingness is unrelated to any observed or unobserved data. Simple deletion or mean/median imputation produces unbiased estimates.\n2. **MAR (Missing at Random)**: Missingness is systematic with respect to observed data (e.g., younger individuals less likely to report income).\n3. **MNAR (Missing Not at Random)**: Missingness depends on the unobserved value itself (e.g., high earners withholding income).\n\n```python\nimport pandas as pd\nimport numpy as np\nfrom sklearn.impute import SimpleImputer, KNNImputer\n\n# Numerical Imputation: Median is robust to outliers\nnum_imputer = SimpleImputer(strategy='median')\n\n# Categorical Imputation: Most frequent or explicit 'Unknown' token\ncat_imputer = SimpleImputer(strategy='constant', fill_value='Missing')\n\n# Advanced Multi-Variate Imputation using K-Nearest Neighbors\nknn_imputer = KNNImputer(n_neighbors=5, weights='distance')\n```\n\n---\n\n## 2. Categorical Variable Encoding\n\n| Technique | Description | Ideal Use Case | Pitfalls |\n| :--- | :--- | :--- | :--- |\n| **One-Hot Encoding** | Creat",
+  "hasNotebook": false,
+  "sizeBytes": 5030,
+  "content": "\n\n# Data Preprocessing: Cleaning, Imputation & Encoding\n\nReal-world datasets are messy, incomplete, and noisy. Model performance is capped by data quality: *\"Garbage In, Garbage Out\"*. This guide establishes a systematic, reproducible workflow for preprocessing raw tabular features before machine learning.\n\n---\n\n## 1. Handling Missing Data (Imputation Strategies)\n\nMissing data mechanisms fall into three categories:\n1. **MCAR (Missing Completely at Random)**: Missingness is unrelated to any observed or unobserved data. Simple deletion or mean/median imputation produces unbiased estimates.\n2. **MAR (Missing at Random)**: Missingness is systematic with respect to observed data (e.g., younger individuals less likely to report income).\n3. **MNAR (Missing Not at Random)**: Missingness depends on the unobserved value itself (e.g., high earners withholding income).\n\n```python\nimport pandas as pd\nimport numpy as np\nfrom sklearn.impute import SimpleImputer, KNNImputer\n\n# Numerical Imputation: Median is robust to outliers\nnum_imputer = SimpleImputer(strategy='median')\n\n# Categorical Imputation: Most frequent or explicit 'Unknown' token\ncat_imputer = SimpleImputer(strategy='constant', fill_value='Missing')\n\n# Advanced Multi-Variate Imputation using K-Nearest Neighbors\nknn_imputer = KNNImputer(n_neighbors=5, weights='distance')\n```\n\n---\n\n## 2. Categorical Variable Encoding\n\n| Technique | Description | Ideal Use Case | Pitfalls |\n| :--- | :--- | :--- | :--- |\n| **One-Hot Encoding** | Creates a binary column for each unique category | Nominal features with low cardinality ($< 15$ categories) | High cardinality creates massive sparse matrices (curse of dimensionality) |\n| **Ordinal Encoding** | Maps ordered categories to integer ranks ($0, 1, 2, \\dots$) | Natural hierarchy (e.g. Low, Medium, High; Junior, Mid, Senior) | Imposes artificial mathematical distances |\n| **Target Encoding** | Replaces category with mean of target variable | High cardinality nominal features (e.g. ZIP code, city) | Severe risk of **data leakage**; requires out-of-fold smoothing |\n| **Frequency Encoding** | Replaces category with frequency count | Captures category popularity without high dimensionality | Different categories with equal frequency collide |\n\n```python\nfrom sklearn.preprocessing import OneHotEncoder\n\n# Avoid multicollinearity (Dummy Variable Trap) by dropping first column\nohe = OneHotEncoder(drop='first', sparse_output=False, handle_unknown='ignore')\n```\n\n---\n\n## 3. Outlier Detection & Treatment\n\nAn outlier is an observation that lies an abnormal distance from other values.\n\n### Interquartile Range (IQR) Method\n$$Q_1 = \\text{25th percentile}, \\quad Q_3 = \\text{75th percentile}$$\n$$\\text{IQR} = Q_3 - Q_1$$\n$$\\text{Lower Bound} = Q_1 - 1.5 \\times \\text{IQR}$$\n$$\\text{Upper Bound} = Q_3 + 1.5 \\times \\text{IQR}$$\n\n```python\ndef remove_outliers_iqr(df, column):\n    q1 = df[column].quantile(0.25)\n    q3 = df[column].quantile(0.75)\n    iqr = q3 - q1\n    lower = q1 - 1.5 * iqr\n    upper = q3 + 1.5 * iqr\n    return df[(df[column] >= lower) & (df[column] <= upper)]\n```\n\n### Winsorization (Capping)\nInstead of discarding rows, cap values at the 1st and 99th percentiles to preserve sample size while muting extreme leverage.\n\n---\n\n## 4. End-to-End Scikit-Learn `ColumnTransformer`\n\nNever apply transformations across the entire dataset before train/test splitting! Doing so causes **Data Leakage**. Always fit transformers **only on the training split**.\n\n```python\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import StandardScaler, OneHotEncoder\nfrom sklearn.impute import SimpleImputer\n\nnumeric_features = ['Age', 'Fare', 'SibSp']\ncategorical_features = ['Sex', 'Embarked', 'Pclass']\n\n# Numeric sub-pipeline\nnumeric_transformer = Pipeline(steps=[\n    ('imputer', SimpleImputer(strategy='median')),\n    ('scaler', StandardScaler())\n])\n\n# Categorical sub-pipeline\ncategorical_transformer = Pipeline(steps=[\n    ('imputer', SimpleImputer(strategy='constant', fill_value='Missing')),\n    ('encoder', OneHotEncoder(handle_unknown='ignore', drop='first'))\n])\n\n# Combine into master preprocessor\npreprocessor = ColumnTransformer(\n    transformers=[\n        ('num', numeric_transformer, numeric_features),\n        ('cat', categorical_transformer, categorical_features)\n    ]\n)\n```\n\n---\n\n## 5. Lab Reference\nExplore the hands-on Titanic data cleaning lab implemented in our original notebook:\n- **Notebook**: `data cleaning/data_clean.ipynb`\n- **Dataset**: `Titanic-Dataset.csv`\n",
+  "frontmatter": {
+    "title": "Data Preprocessing: Cleaning, Imputation & Encoding Pipeline",
+    "subject": "04-Data-Preprocessing",
+    "difficulty": "Beginner",
+    "tags": [
+      "data-cleaning",
+      "imputation",
+      "categorical-encoding",
+      "outliers",
+      "pipelines"
+    ],
+    "prerequisites": [
+      "03-Data-Analysis"
+    ],
+    "description": "A comprehensive production-grade data preprocessing pipeline: strategies for handling missing values, encoding categorical variables, detecting outliers, and building scikit-learn ColumnTransformers."
+  }
+}

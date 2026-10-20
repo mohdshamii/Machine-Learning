@@ -1,0 +1,107 @@
+{
+  "id": "10-ensemble-learning-01-bagging-boosting-random-forest",
+  "title": "Ensemble Learning: Bagging, Boosting, Random Forest & XGBoost",
+  "subjectId": "10-Ensemble-Learning",
+  "format": "markdown",
+  "fileName": "01-bagging-boosting-random-forest.md",
+  "relativePath": "content/10-Ensemble-Learning/01-bagging-boosting-random-forest.md",
+  "difficulty": "Advanced",
+  "tags": [
+    "ensemble",
+    "bagging",
+    "boosting",
+    "random-forest",
+    "xgboost",
+    "gradient-boosting"
+  ],
+  "prerequisites": [
+    "06-Supervised-Learning",
+    "09-Model-Evaluation"
+  ],
+  "description": "Combine weak learners into state-of-the-art predictive ensembles: Bootstrap Aggregation, Random Forests, AdaBoost, Gradient Boosting, and XGBoost tree optimization.",
+  "estimatedMinutes": 3,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Ensemble Learning: Bagging, Boosting & Gradient Boosted Trees",
+      "id": "ensemble-learning-bagging-boosting-gradient-boosted-trees"
+    },
+    {
+      "level": 2,
+      "title": "1. Bagging (Bootstrap Aggregating)",
+      "id": "1-bagging-bootstrap-aggregating"
+    },
+    {
+      "level": 3,
+      "title": "The Mechanism",
+      "id": "the-mechanism"
+    },
+    {
+      "level": 3,
+      "title": "Random Forest: De-correlating Trees",
+      "id": "random-forest-de-correlating-trees"
+    },
+    {
+      "level": 2,
+      "title": "2. Boosting: Sequential Error Correction",
+      "id": "2-boosting-sequential-error-correction"
+    },
+    {
+      "level": 3,
+      "title": "1. AdaBoost (Adaptive Boosting)",
+      "id": "1-adaboost-adaptive-boosting"
+    },
+    {
+      "level": 3,
+      "title": "2. Gradient Boosting (GBM)",
+      "id": "2-gradient-boosting-gbm"
+    },
+    {
+      "level": 3,
+      "title": "3. XGBoost (Extreme Gradient Boosting)",
+      "id": "3-xgboost-extreme-gradient-boosting"
+    },
+    {
+      "level": 2,
+      "title": "3. Python Implementation Example",
+      "id": "3-python-implementation-example"
+    },
+    {
+      "level": 1,
+      "title": "Random Forest",
+      "id": "random-forest"
+    },
+    {
+      "level": 1,
+      "title": "XGBoost",
+      "id": "xgboost"
+    },
+    {
+      "level": 2,
+      "title": "4. Bagging vs. Boosting Summary",
+      "id": "4-bagging-vs-boosting-summary"
+    }
+  ],
+  "searchTokens": "Ensemble Learning: Bagging, Boosting, Random Forest & XGBoost Combine weak learners into state-of-the-art predictive ensembles: Bootstrap Aggregation, Random Forests, AdaBoost, Gradient Boosting, and XGBoost tree optimization. ensemble bagging boosting random-forest xgboost gradient-boosting \n\n# Ensemble Learning: Bagging, Boosting & Gradient Boosted Trees\n\nEnsemble learning combines predictions from multiple individual models (base learners) to produce a single aggregated prediction that generalizes significantly better than any single constituent model.\n\n---\n\n## 1. Bagging (Bootstrap Aggregating)\n\nBagging reduces **variance** of high-variance, low-bias estimators (such as deep, unpruned Decision Trees).\n\n### The Mechanism\n1. Given dataset $\\mathcal{D}$ of size $m$, draw $B$ bootstrap samples $\\mathcal{D}_1, \\dots, \\mathcal{D}_B$ of size $m$ **with replacement**.\n   *(Note: roughly $1 - \\frac{1}{e} \\approx 63.2\\%$ of samples appear in each bootstrap sample; the remaining $36.8\\%$ form the **Out-Of-Bag (OOB)** evaluation set).*\n2. Train a separate base learner $f_b(\\mathbf{x})$ on each bootstrap sample $\\mathcal{D}_b$.\n3. Aggregate predictions:\n   - Regression: $\\hat{f}_{\\text{bag}}(\\mathbf{x}) = \\frac{1}{B} \\sum_{b=1}^B f_b(\\mathbf{x})$\n   - Classification: Majority voting (mode).\n\n### Random Forest: De-correlating Trees\nStandard bagging on trees still produces correlated trees if a few strong predictors dominate splits. **Random Forests** introduce **feature subsampling**:\nAt every split, consider only a random subset of $k = \\sqrt{d}$ (for classification) or $k = d/3$ (for regression) candidate features. This de-correlates individual trees, dramatically lowering ensemble variance.\n\n---\n\n## 2. Boosting: Sequential Error Correction\n\nBoosting reduces **bias** by ",
+  "hasNotebook": false,
+  "sizeBytes": 4669,
+  "content": "\n\n# Ensemble Learning: Bagging, Boosting & Gradient Boosted Trees\n\nEnsemble learning combines predictions from multiple individual models (base learners) to produce a single aggregated prediction that generalizes significantly better than any single constituent model.\n\n---\n\n## 1. Bagging (Bootstrap Aggregating)\n\nBagging reduces **variance** of high-variance, low-bias estimators (such as deep, unpruned Decision Trees).\n\n### The Mechanism\n1. Given dataset $\\mathcal{D}$ of size $m$, draw $B$ bootstrap samples $\\mathcal{D}_1, \\dots, \\mathcal{D}_B$ of size $m$ **with replacement**.\n   *(Note: roughly $1 - \\frac{1}{e} \\approx 63.2\\%$ of samples appear in each bootstrap sample; the remaining $36.8\\%$ form the **Out-Of-Bag (OOB)** evaluation set).*\n2. Train a separate base learner $f_b(\\mathbf{x})$ on each bootstrap sample $\\mathcal{D}_b$.\n3. Aggregate predictions:\n   - Regression: $\\hat{f}_{\\text{bag}}(\\mathbf{x}) = \\frac{1}{B} \\sum_{b=1}^B f_b(\\mathbf{x})$\n   - Classification: Majority voting (mode).\n\n### Random Forest: De-correlating Trees\nStandard bagging on trees still produces correlated trees if a few strong predictors dominate splits. **Random Forests** introduce **feature subsampling**:\nAt every split, consider only a random subset of $k = \\sqrt{d}$ (for classification) or $k = d/3$ (for regression) candidate features. This de-correlates individual trees, dramatically lowering ensemble variance.\n\n---\n\n## 2. Boosting: Sequential Error Correction\n\nBoosting reduces **bias** by training base learners sequentially, where each learner attempts to correct the errors made by its predecessors.\n\n```text\n[Data] -> [Model 1] -> [Calculate Residuals/Reweight] -> [Model 2] -> ... -> [Final Weighted Sum]\n```\n\n### 1. AdaBoost (Adaptive Boosting)\n- Base learner: Decision Stumps (1-split trees).\n- Re-weights misclassified samples with higher weights before training the next stump.\n- Model weight: $\\alpha_t = \\frac{1}{2} \\ln\\left(\\frac{1 - \\epsilon_t}{\\epsilon_t}\\right)$.\n\n### 2. Gradient Boosting (GBM)\nInstead of re-weighting data points, Gradient Boosting fits subsequent trees directly to the **pseudo-residuals** (negative gradient of the loss function):\n\n$$r_{im} = -\\left[ \\frac{\\partial L(y_i, f(\\mathbf{x}_i))}{\\partial f(\\mathbf{x}_i)} \\right]_{f = f_{m-1}}$$\n\nFor Mean Squared Error loss $L(y, f) = \\frac{1}{2}(y - f)^2$, the negative gradient is simply the residual:\n$$-\\frac{\\partial L}{\\partial f} = y - f(\\mathbf{x})$$\n\n### 3. XGBoost (Extreme Gradient Boosting)\nXGBoost optimizes an objective with second-order Taylor expansion:\n\n$$\\mathcal{L}^{(t)} \\approx \\sum_{i=1}^m \\left[ g_i f_t(\\mathbf{x}_i) + \\frac{1}{2} h_i f_t^2(\\mathbf{x}_i) \\right] + \\Omega(f_t)$$\n\nWhere:\n- $g_i = \\partial_{\\hat{y}^{(t-1)}} L(y_i, \\hat{y}^{(t-1)})$ (first-order gradient)\n- $h_i = \\partial^2_{\\hat{y}^{(t-1)}} L(y_i, \\hat{y}^{(t-1)})$ (second-order Hessian)\n- $\\Omega(f) = \\gamma T + \\frac{1}{2} \\lambda \\sum_{j=1}^T w_j^2$ (complexity penalty on leaves $T$ and leaf weights $w$).\n\n---\n\n## 3. Python Implementation Example\n\n```python\nfrom sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier\nimport xgboost as xgb\n\n# Random Forest\nrf = RandomForestClassifier(n_estimators=100, max_depth=10, oob_score=True, random_state=42)\nrf.fit(X_train, y_train)\nprint(f\"OOB Accuracy: {rf.oob_score_:.3f}\")\n\n# XGBoost\nxgb_model = xgb.XGBClassifier(\n    n_estimators=200,\n    learning_rate=0.05,\n    max_depth=6,\n    subsample=0.8,\n    colsample_bytree=0.8,\n    random_state=42\n)\nxgb_model.fit(X_train, y_train)\n```\n\n---\n\n## 4. Bagging vs. Boosting Summary\n\n| Feature | Bagging (e.g. Random Forest) | Boosting (e.g. XGBoost, LightGBM) |\n| :--- | :--- | :--- |\n| **Goal** | Reduce Variance (Prevent Overfitting) | Reduce Bias (Prevent Underfitting) |\n| **Base Learners** | Deep, unpruned trees (low bias, high variance) | Shallow trees / stumps (high bias, low variance) |\n| **Training** | Parallel / Independent | Sequential / Dependent |\n| **Overfitting Risk** | Extremely low with more trees | High if trained for too many rounds without shrinkage |\n| **Tuning Sensitivity**| Low (works well with default parameters) | High (requires tuning learning rate, depth, subsample) |\n",
+  "frontmatter": {
+    "title": "Ensemble Learning: Bagging, Boosting, Random Forest & XGBoost",
+    "subject": "10-Ensemble-Learning",
+    "difficulty": "Advanced",
+    "tags": [
+      "ensemble",
+      "bagging",
+      "boosting",
+      "random-forest",
+      "xgboost",
+      "gradient-boosting"
+    ],
+    "prerequisites": [
+      "06-Supervised-Learning",
+      "09-Model-Evaluation"
+    ],
+    "description": "Combine weak learners into state-of-the-art predictive ensembles: Bootstrap Aggregation, Random Forests, AdaBoost, Gradient Boosting, and XGBoost tree optimization."
+  }
+}

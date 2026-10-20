@@ -1,0 +1,27 @@
+{
+  "id": "pdf-logistic-regression-notes",
+  "title": "Logistic Regression Notes (Reference PDF)",
+  "subjectId": "06-Supervised-Learning",
+  "format": "pdf",
+  "fileName": "Logistic Regression Notes 📝 .pdf",
+  "relativePath": "Logistic Regression Notes 📝 .pdf",
+  "githubBlobUrl": "https://github.com/codexshami/MLVault/blob/main/Logistic%20Regression%20Notes%20%F0%9F%93%9D%20.pdf",
+  "githubRawUrl": "https://github.com/codexshami/MLVault/raw/main/Logistic%20Regression%20Notes%20%F0%9F%93%9D%20.pdf",
+  "difficulty": "Reference",
+  "tags": [
+    "pdf",
+    "notes",
+    "handbook",
+    "reference"
+  ],
+  "prerequisites": [],
+  "description": "Original study notes and PDF reference document (27.3 MB).",
+  "estimatedMinutes": 136,
+  "headings": [],
+  "searchTokens": "Logistic Regression Notes pdf notes reference 06-Supervised-Learning",
+  "hasNotebook": false,
+  "sizeBytes": 28615995,
+  "sizeMB": 27.29,
+  "pdfUrl": "https://github.com/codexshami/MLVault/raw/main/Logistic%20Regression%20Notes%20%F0%9F%93%9D%20.pdf",
+  "localPath": "Logistic Regression Notes 📝 .pdf"
+}

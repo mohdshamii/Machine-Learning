@@ -1,0 +1,27 @@
+{
+  "id": "pdf-mathematics-for-machine-learning",
+  "title": "Mathematics For Machine Learning (Reference PDF)",
+  "subjectId": "01-Mathematics",
+  "format": "pdf",
+  "fileName": "Mathematics For Machine Learning .pdf",
+  "relativePath": "Mathematics For Machine Learning .pdf",
+  "githubBlobUrl": "https://github.com/codexshami/MLVault/blob/main/Mathematics%20For%20Machine%20Learning%20.pdf",
+  "githubRawUrl": "https://github.com/codexshami/MLVault/raw/main/Mathematics%20For%20Machine%20Learning%20.pdf",
+  "difficulty": "Reference",
+  "tags": [
+    "pdf",
+    "notes",
+    "handbook",
+    "reference"
+  ],
+  "prerequisites": [],
+  "description": "Original study notes and PDF reference document (1.4 MB).",
+  "estimatedMinutes": 6,
+  "headings": [],
+  "searchTokens": "Mathematics For Machine Learning pdf notes reference 01-Mathematics",
+  "hasNotebook": false,
+  "sizeBytes": 1452376,
+  "sizeMB": 1.39,
+  "pdfUrl": "https://github.com/codexshami/MLVault/raw/main/Mathematics%20For%20Machine%20Learning%20.pdf",
+  "localPath": "Mathematics For Machine Learning .pdf"
+}

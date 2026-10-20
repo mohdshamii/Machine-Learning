@@ -1,0 +1,80 @@
+{
+  "id": "05-exploratory-data-analysis-01-eda-framework-guide",
+  "title": "Exploratory Data Analysis (EDA): The Complete Framework",
+  "subjectId": "05-Exploratory-Data-Analysis",
+  "format": "markdown",
+  "fileName": "01-eda-framework-guide.md",
+  "relativePath": "content/05-Exploratory-Data-Analysis/01-eda-framework-guide.md",
+  "difficulty": "Beginner",
+  "tags": [
+    "eda",
+    "data-visualization",
+    "correlation",
+    "distribution",
+    "pairplot",
+    "heatmaps"
+  ],
+  "prerequisites": [
+    "03-Data-Analysis"
+  ],
+  "description": "A battle-tested 5-step framework for Exploratory Data Analysis: shape checks, univariate distribution profiling, bivariate relationships, correlation heatmaps, and target leakage detection.",
+  "estimatedMinutes": 1,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Exploratory Data Analysis (EDA) Framework",
+      "id": "exploratory-data-analysis-eda-framework"
+    },
+    {
+      "level": 2,
+      "title": "The 5-Step EDA Blueprint",
+      "id": "the-5-step-eda-blueprint"
+    },
+    {
+      "level": 3,
+      "title": "Step 1: Structural Assessment",
+      "id": "step-1-structural-assessment"
+    },
+    {
+      "level": 3,
+      "title": "Step 2: Univariate Analysis",
+      "id": "step-2-univariate-analysis"
+    },
+    {
+      "level": 3,
+      "title": "Step 3: Bivariate & Multivariate Analysis",
+      "id": "step-3-bivariate-multivariate-analysis"
+    },
+    {
+      "level": 3,
+      "title": "Step 4: Correlation & Collinearity Analysis",
+      "id": "step-4-correlation-collinearity-analysis"
+    },
+    {
+      "level": 3,
+      "title": "Step 5: Data Leakage & Sanity Audits",
+      "id": "step-5-data-leakage-sanity-audits"
+    }
+  ],
+  "searchTokens": "Exploratory Data Analysis (EDA): The Complete Framework A battle-tested 5-step framework for Exploratory Data Analysis: shape checks, univariate distribution profiling, bivariate relationships, correlation heatmaps, and target leakage detection. eda data-visualization correlation distribution pairplot heatmaps \n\n# Exploratory Data Analysis (EDA) Framework\n\nExploratory Data Analysis (EDA) is the detective work of machine learning. It reveals anomalies, informs feature engineering, and prevents catastrophic data leaks before any model is trained.\n\n---\n\n## The 5-Step EDA Blueprint\n\n### Step 1: Structural Assessment\n- Dimensions, feature data types, memory consumption.\n- Missing value counts and percentages.\n- Cardinality of categorical variables.\n\n### Step 2: Univariate Analysis\n- **Numerical Features**: Histograms, KDE plots, Boxplots. Check for skewness, kurtosis, and zero-inflation.\n  - If skewness $> 1.0$, consider $\\log(1 + x)$ or Box-Cox transformation.\n- **Categorical Features**: Frequency bar plots. Check for heavy class imbalances or rare categories ($< 1\\%$ frequency).\n\n### Step 3: Bivariate & Multivariate Analysis\n- **Feature vs. Target**:\n  - Continuous feature vs Continuous target: Scatter plots, Spearman rank correlation.\n  - Continuous feature vs Binary target: Overlaid KDE curves, violin plots.\n  - Categorical feature vs Target: Cross-tabulations, normalized stacked bar charts.\n- **Feature vs. Feature Interaction**: Pairplots and scatter matrices to detect multi-collinearity.\n\n### Step 4: Correlation & Collinearity Analysis\nPearson correlation matrix:\n$$r = \\frac{\\sum (x - \\bar{x})(y - \\bar{y})}{\\sqrt{\\sum(x - \\bar{x})^2 \\sum(y - \\bar{y})^2}}$$\n- Check Variance Inflation Factor (VIF): Features with $\\text{VIF} > 5$ or $10$ indicate severe multicollinearity that destabi",
+  "hasNotebook": false,
+  "sizeBytes": 2242,
+  "content": "\n\n# Exploratory Data Analysis (EDA) Framework\n\nExploratory Data Analysis (EDA) is the detective work of machine learning. It reveals anomalies, informs feature engineering, and prevents catastrophic data leaks before any model is trained.\n\n---\n\n## The 5-Step EDA Blueprint\n\n### Step 1: Structural Assessment\n- Dimensions, feature data types, memory consumption.\n- Missing value counts and percentages.\n- Cardinality of categorical variables.\n\n### Step 2: Univariate Analysis\n- **Numerical Features**: Histograms, KDE plots, Boxplots. Check for skewness, kurtosis, and zero-inflation.\n  - If skewness $> 1.0$, consider $\\log(1 + x)$ or Box-Cox transformation.\n- **Categorical Features**: Frequency bar plots. Check for heavy class imbalances or rare categories ($< 1\\%$ frequency).\n\n### Step 3: Bivariate & Multivariate Analysis\n- **Feature vs. Target**:\n  - Continuous feature vs Continuous target: Scatter plots, Spearman rank correlation.\n  - Continuous feature vs Binary target: Overlaid KDE curves, violin plots.\n  - Categorical feature vs Target: Cross-tabulations, normalized stacked bar charts.\n- **Feature vs. Feature Interaction**: Pairplots and scatter matrices to detect multi-collinearity.\n\n### Step 4: Correlation & Collinearity Analysis\nPearson correlation matrix:\n$$r = \\frac{\\sum (x - \\bar{x})(y - \\bar{y})}{\\sqrt{\\sum(x - \\bar{x})^2 \\sum(y - \\bar{y})^2}}$$\n- Check Variance Inflation Factor (VIF): Features with $\\text{VIF} > 5$ or $10$ indicate severe multicollinearity that destabilizes linear model coefficients.\n\n### Step 5: Data Leakage & Sanity Audits\n- Check if any feature correlates almost perfectly ($r > 0.98$) with the target due to downstream operational logging.\n- Verify that timestamp fields occur strictly prior to the target outcome event.\n",
+  "frontmatter": {
+    "title": "Exploratory Data Analysis (EDA): The Complete Framework",
+    "subject": "05-Exploratory-Data-Analysis",
+    "difficulty": "Beginner",
+    "tags": [
+      "eda",
+      "data-visualization",
+      "correlation",
+      "distribution",
+      "pairplot",
+      "heatmaps"
+    ],
+    "prerequisites": [
+      "03-Data-Analysis"
+    ],
+    "description": "A battle-tested 5-step framework for Exploratory Data Analysis: shape checks, univariate distribution profiling, bivariate relationships, correlation heatmaps, and target leakage detection."
+  }
+}

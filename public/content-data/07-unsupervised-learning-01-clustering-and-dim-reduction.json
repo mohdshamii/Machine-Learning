@@ -1,0 +1,120 @@
+{
+  "id": "07-unsupervised-learning-01-clustering-and-dim-reduction",
+  "title": "Unsupervised Learning: K-Means & Hierarchical Clustering",
+  "subjectId": "07-Unsupervised-Learning",
+  "format": "markdown",
+  "fileName": "01-clustering-and-dim-reduction.md",
+  "relativePath": "content/07-Unsupervised-Learning/01-clustering-and-dim-reduction.md",
+  "difficulty": "Intermediate",
+  "tags": [
+    "unsupervised",
+    "clustering",
+    "kmeans",
+    "hierarchical",
+    "dendrogram",
+    "elbow-method"
+  ],
+  "prerequisites": [
+    "01-Mathematics"
+  ],
+  "description": "Deep dive into Unsupervised Learning: K-Means Lloyd's algorithm, WCSS, Silhouette coefficients, Agglomerative vs Divisive Hierarchical Clustering, and linkage metrics.",
+  "estimatedMinutes": 3,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Unsupervised Learning: K-Means & Hierarchical Clustering",
+      "id": "unsupervised-learning-k-means-hierarchical-clustering"
+    },
+    {
+      "level": 2,
+      "title": "1. K-Means Clustering Algorithm",
+      "id": "1-k-means-clustering-algorithm"
+    },
+    {
+      "level": 3,
+      "title": "Mathematical Objective",
+      "id": "mathematical-objective"
+    },
+    {
+      "level": 3,
+      "title": "Lloyd's Iterative Algorithm",
+      "id": "lloyd-s-iterative-algorithm"
+    },
+    {
+      "level": 2,
+      "title": "2. Choosing Optimal $k$: Elbow Method vs. Silhouette Analysis",
+      "id": "2-choosing-optimal-k-elbow-method-vs-silhouette-analysis"
+    },
+    {
+      "level": 3,
+      "title": "The Elbow Method",
+      "id": "the-elbow-method"
+    },
+    {
+      "level": 3,
+      "title": "Silhouette Score",
+      "id": "silhouette-score"
+    },
+    {
+      "level": 2,
+      "title": "3. Hierarchical Clustering",
+      "id": "3-hierarchical-clustering"
+    },
+    {
+      "level": 3,
+      "title": "Agglomerative (Bottom-Up)",
+      "id": "agglomerative-bottom-up"
+    },
+    {
+      "level": 3,
+      "title": "Linkage Criteria for Cluster Distance",
+      "id": "linkage-criteria-for-cluster-distance"
+    },
+    {
+      "level": 2,
+      "title": "4. Code Example with Scikit-Learn",
+      "id": "4-code-example-with-scikit-learn"
+    },
+    {
+      "level": 1,
+      "title": "Sample generation",
+      "id": "sample-generation"
+    },
+    {
+      "level": 1,
+      "title": "K-Means with K-Means++ initialization",
+      "id": "k-means-with-k-means-initialization"
+    },
+    {
+      "level": 1,
+      "title": "Agglomerative Clustering",
+      "id": "agglomerative-clustering"
+    },
+    {
+      "level": 2,
+      "title": "5. Original Repository Lab References",
+      "id": "5-original-repository-lab-references"
+    }
+  ],
+  "searchTokens": "Unsupervised Learning: K-Means & Hierarchical Clustering Deep dive into Unsupervised Learning: K-Means Lloyd's algorithm, WCSS, Silhouette coefficients, Agglomerative vs Divisive Hierarchical Clustering, and linkage metrics. unsupervised clustering kmeans hierarchical dendrogram elbow-method \n\n# Unsupervised Learning: K-Means & Hierarchical Clustering\n\nUnsupervised learning discovers intrinsic structures, hidden clusters, and representations in data without predefined labels $y$.\n\n---\n\n## 1. K-Means Clustering Algorithm\n\nK-Means partitions $m$ data points into $k$ distinct, non-overlapping clusters.\n\n### Mathematical Objective\nMinimize the Within-Cluster Sum of Squares (WCSS / Inertia):\n\n$$J(c, \\mu) = \\sum_{i=1}^m \\|\\mathbf{x}^{(i)} - \\mathbf{\\mu}_{c^{(i)}}\\|_2^2$$\n\nWhere:\n- $c^{(i)} \\in \\{1, \\dots, k\\}$ is the cluster assignment for sample $i$.\n- $\\mathbf{\\mu}_j$ is the centroid of cluster $j$.\n\n### Lloyd's Iterative Algorithm\n1. **Initialize** $k$ centroids $\\mathbf{\\mu}_1, \\dots, \\mathbf{\\mu}_k$ randomly (or with K-Means++).\n2. **Assignment Step**: Assign each observation to its closest centroid:\n   $$c^{(i)} := \\arg\\min_j \\|\\mathbf{x}^{(i)} - \\mathbf{\\mu}_j\\|_2^2$$\n3. **Update Step**: Recompute centroids as the mean of all assigned points:\n   $$\\mathbf{\\mu}_j := \\frac{1}{|C_j|} \\sum_{i \\in C_j} \\mathbf{x}^{(i)}$$\n4. Repeat steps 2-3 until centroids stop moving (convergence).\n\n---\n\n## 2. Choosing Optimal $k$: Elbow Method vs. Silhouette Analysis\n\n### The Elbow Method\nPlot WCSS vs $k$. The curve decreases monotonically; look for the \"elbow\" point where the rate of decrease abruptly flattens.\n\n### Silhouette Score\nMeasures how similar an object is to its own cluster compared to other clusters:\n\n$$s(i) = \\frac{b(i) - a(i)}{\\max(a(i), b(i))}, \\quad s(i) \\in [-1, +",
+  "hasNotebook": false,
+  "sizeBytes": 4386,
+  "content": "\n\n# Unsupervised Learning: K-Means & Hierarchical Clustering\n\nUnsupervised learning discovers intrinsic structures, hidden clusters, and representations in data without predefined labels $y$.\n\n---\n\n## 1. K-Means Clustering Algorithm\n\nK-Means partitions $m$ data points into $k$ distinct, non-overlapping clusters.\n\n### Mathematical Objective\nMinimize the Within-Cluster Sum of Squares (WCSS / Inertia):\n\n$$J(c, \\mu) = \\sum_{i=1}^m \\|\\mathbf{x}^{(i)} - \\mathbf{\\mu}_{c^{(i)}}\\|_2^2$$\n\nWhere:\n- $c^{(i)} \\in \\{1, \\dots, k\\}$ is the cluster assignment for sample $i$.\n- $\\mathbf{\\mu}_j$ is the centroid of cluster $j$.\n\n### Lloyd's Iterative Algorithm\n1. **Initialize** $k$ centroids $\\mathbf{\\mu}_1, \\dots, \\mathbf{\\mu}_k$ randomly (or with K-Means++).\n2. **Assignment Step**: Assign each observation to its closest centroid:\n   $$c^{(i)} := \\arg\\min_j \\|\\mathbf{x}^{(i)} - \\mathbf{\\mu}_j\\|_2^2$$\n3. **Update Step**: Recompute centroids as the mean of all assigned points:\n   $$\\mathbf{\\mu}_j := \\frac{1}{|C_j|} \\sum_{i \\in C_j} \\mathbf{x}^{(i)}$$\n4. Repeat steps 2-3 until centroids stop moving (convergence).\n\n---\n\n## 2. Choosing Optimal $k$: Elbow Method vs. Silhouette Analysis\n\n### The Elbow Method\nPlot WCSS vs $k$. The curve decreases monotonically; look for the \"elbow\" point where the rate of decrease abruptly flattens.\n\n### Silhouette Score\nMeasures how similar an object is to its own cluster compared to other clusters:\n\n$$s(i) = \\frac{b(i) - a(i)}{\\max(a(i), b(i))}, \\quad s(i) \\in [-1, +1]$$\n\n- $a(i)$: Mean intra-cluster distance between sample $i$ and all other points in the same cluster.\n- $b(i)$: Mean nearest-cluster distance between sample $i$ and points in the nearest neighboring cluster.\n- $s \\approx +1$: Sample is well clustered.\n- $s \\approx 0$: Sample is on the boundary between two clusters.\n- $s < 0$: Sample might belong in the neighboring cluster.\n\n---\n\n## 3. Hierarchical Clustering\n\nHierarchical clustering builds nested tree representations (dendrograms) without requiring a pre-specified $k$.\n\n### Agglomerative (Bottom-Up)\n1. Start with $m$ clusters (every data point in its own cluster).\n2. Compute pairwise distance matrix between all clusters.\n3. Merge the two closest clusters.\n4. Repeat until a single cluster encompasses all points.\n\n### Linkage Criteria for Cluster Distance\n- **Single Linkage**: Minimum distance between any point in cluster $A$ and any point in cluster $B$:\n  $$D(A, B) = \\min_{\\mathbf{x} \\in A, \\mathbf{y} \\in B} \\|\\mathbf{x} - \\mathbf{y}\\|$$\n  *(Prone to chaining phenomenon / elongated clusters)*\n- **Complete Linkage**: Maximum distance between points:\n  $$D(A, B) = \\max_{\\mathbf{x} \\in A, \\mathbf{y} \\in B} \\|\\mathbf{x} - \\mathbf{y}\\|$$\n  *(Produces compact, spherical clusters)*\n- **Average Linkage**: Average distance across all pairs:\n  $$D(A, B) = \\frac{1}{|A||B|} \\sum_{\\mathbf{x} \\in A} \\sum_{\\mathbf{y} \\in B} \\|\\mathbf{x} - \\mathbf{y}\\|$$\n- **Ward's Linkage**: Minimizes the variance increase when merging clusters.\n\n---\n\n## 4. Code Example with Scikit-Learn\n\n```python\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.cluster import KMeans, AgglomerativeClustering\nfrom sklearn.metrics import silhouette_score\nfrom scipy.cluster.hierarchy import dendrogram, linkage\n\n# Sample generation\nX = np.random.randn(300, 2)\n\n# K-Means with K-Means++ initialization\nkmeans = KMeans(n_clusters=3, init='k-means++', random_state=42)\ncluster_labels = kmeans.fit_predict(X)\n\nsil_score = silhouette_score(X, cluster_labels)\nprint(f\"K-Means Silhouette Score: {sil_score:.3f}\")\n\n# Agglomerative Clustering\nagg = AgglomerativeClustering(n_clusters=3, linkage='ward')\nagg_labels = agg.fit_predict(X)\n```\n\n---\n\n## 5. Original Repository Lab References\nExplore our full hands-on clustering notebooks:\n- **Notebook 1**: `Unsupervised/K-Mean Clustering.ipynb`\n- **Notebook 2**: `Unsupervised/Hierarchial_Clustering.ipynb`\n- **Reference Notes**: `K Means Clustering .pdf`\n",
+  "frontmatter": {
+    "title": "Unsupervised Learning: K-Means & Hierarchical Clustering",
+    "subject": "07-Unsupervised-Learning",
+    "difficulty": "Intermediate",
+    "tags": [
+      "unsupervised",
+      "clustering",
+      "kmeans",
+      "hierarchical",
+      "dendrogram",
+      "elbow-method"
+    ],
+    "prerequisites": [
+      "01-Mathematics"
+    ],
+    "description": "Deep dive into Unsupervised Learning: K-Means Lloyd's algorithm, WCSS, Silhouette coefficients, Agglomerative vs Divisive Hierarchical Clustering, and linkage metrics."
+  }
+}

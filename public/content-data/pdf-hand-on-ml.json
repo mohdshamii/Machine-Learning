@@ -1,0 +1,27 @@
+{
+  "id": "pdf-hand-on-ml",
+  "title": "Hand-on-ML (Reference PDF)",
+  "subjectId": "18-Projects",
+  "format": "pdf",
+  "fileName": "Hand-on-ML.pdf",
+  "relativePath": "Hand-on-ML.pdf",
+  "githubBlobUrl": "https://github.com/codexshami/MLVault/blob/main/Hand-on-ML.pdf",
+  "githubRawUrl": "https://github.com/codexshami/MLVault/raw/main/Hand-on-ML.pdf",
+  "difficulty": "Reference",
+  "tags": [
+    "pdf",
+    "notes",
+    "handbook",
+    "reference"
+  ],
+  "prerequisites": [],
+  "description": "Original study notes and PDF reference document (7.2 MB).",
+  "estimatedMinutes": 36,
+  "headings": [],
+  "searchTokens": "Hand-on-ML pdf notes reference 18-Projects",
+  "hasNotebook": false,
+  "sizeBytes": 7551093,
+  "sizeMB": 7.2,
+  "pdfUrl": "https://github.com/codexshami/MLVault/raw/main/Hand-on-ML.pdf",
+  "localPath": "Hand-on-ML.pdf"
+}

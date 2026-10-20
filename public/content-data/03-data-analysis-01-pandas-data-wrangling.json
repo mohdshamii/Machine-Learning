@@ -1,0 +1,88 @@
+{
+  "id": "03-data-analysis-01-pandas-data-wrangling",
+  "title": "Pandas Data Wrangling & Manipulation for ML",
+  "subjectId": "03-Data-Analysis",
+  "format": "markdown",
+  "fileName": "01-pandas-data-wrangling.md",
+  "relativePath": "content/03-Data-Analysis/01-pandas-data-wrangling.md",
+  "difficulty": "Beginner",
+  "tags": [
+    "pandas",
+    "data-wrangling",
+    "group-by",
+    "aggregation",
+    "memory-optimization"
+  ],
+  "prerequisites": [
+    "00-Python-for-ML"
+  ],
+  "description": "High-performance data manipulation with Pandas: vectorized operations, split-apply-combine GroupBy patterns, indexing techniques, and memory profiling.",
+  "estimatedMinutes": 1,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Pandas Data Wrangling & Manipulation for ML",
+      "id": "pandas-data-wrangling-manipulation-for-ml"
+    },
+    {
+      "level": 2,
+      "title": "1. Vectorized Filtering & Indexing",
+      "id": "1-vectorized-filtering-indexing"
+    },
+    {
+      "level": 1,
+      "title": "Load dataset",
+      "id": "load-dataset"
+    },
+    {
+      "level": 1,
+      "title": "Fast boolean indexing",
+      "id": "fast-boolean-indexing"
+    },
+    {
+      "level": 1,
+      "title": "Query syntax for clean readable code",
+      "id": "query-syntax-for-clean-readable-code"
+    },
+    {
+      "level": 2,
+      "title": "2. Split-Apply-Combine with .groupby()",
+      "id": "2-split-apply-combine-with-groupby"
+    },
+    {
+      "level": 1,
+      "title": "Grouping multiple aggregations",
+      "id": "grouping-multiple-aggregations"
+    },
+    {
+      "level": 2,
+      "title": "3. Reshaping: Pivoting & Melting",
+      "id": "3-reshaping-pivoting-melting"
+    },
+    {
+      "level": 2,
+      "title": "4. Memory Optimization Strategies",
+      "id": "4-memory-optimization-strategies"
+    }
+  ],
+  "searchTokens": "Pandas Data Wrangling & Manipulation for ML High-performance data manipulation with Pandas: vectorized operations, split-apply-combine GroupBy patterns, indexing techniques, and memory profiling. pandas data-wrangling group-by aggregation memory-optimization \n\n# Pandas Data Wrangling & Manipulation for ML\n\nPandas is the primary tool for structured tabular data analysis. Real-world machine learning workflows spend over 70% of engineering time preparing, reshaping, filtering, and joining data in Pandas.\n\n---\n\n## 1. Vectorized Filtering & Indexing\n\nNever iterate over DataFrame rows using `for i in range(len(df))` or `df.iterrows()`; use vectorized conditions and `.loc[]`.\n\n```python\nimport pandas as pd\nimport numpy as np\n\n# Load dataset\ndf = pd.read_csv(\"data cleaning/Titanic-Dataset.csv\")\n\n# Fast boolean indexing\nfiltered_df = df.loc[(df[\"Age\"] > 30) & (df[\"Pclass\"] == 1), [\"Name\", \"Age\", \"Fare\", \"Survived\"]]\n\n# Query syntax for clean readable code\nhigh_fare = df.query(\"Fare > 100 and Sex == 'female'\")\n```\n\n---\n\n## 2. Split-Apply-Combine with `.groupby()`\n\nThe `groupby` operation splits data into subsets, applies an aggregation function, and combines results.\n\n```python\n# Grouping multiple aggregations\nagg_summary = df.groupby([\"Pclass\", \"Sex\"]).agg(\n    mean_age=(\"Age\", \"mean\"),\n    median_fare=(\"Fare\", \"median\"),\n    survival_rate=(\"Survived\", \"mean\"),\n    passenger_count=(\"PassengerId\", \"count\")\n).reset_index()\n\nprint(agg_summary)\n```\n\n---\n\n## 3. Reshaping: Pivoting & Melting\n\n- **`pivot_table()`**: Summarizes and flattens cross-tabulated data.\n- **`melt()`**: Unpivots DataFrame from wide format to long format (tidy data).\n\n---\n\n## 4. Memory Optimization Strategies\nWhen handling datasets that approach RAM limits:\n1. Downcast int",
+  "hasNotebook": false,
+  "sizeBytes": 2484,
+  "content": "\n\n# Pandas Data Wrangling & Manipulation for ML\n\nPandas is the primary tool for structured tabular data analysis. Real-world machine learning workflows spend over 70% of engineering time preparing, reshaping, filtering, and joining data in Pandas.\n\n---\n\n## 1. Vectorized Filtering & Indexing\n\nNever iterate over DataFrame rows using `for i in range(len(df))` or `df.iterrows()`; use vectorized conditions and `.loc[]`.\n\n```python\nimport pandas as pd\nimport numpy as np\n\n# Load dataset\ndf = pd.read_csv(\"data cleaning/Titanic-Dataset.csv\")\n\n# Fast boolean indexing\nfiltered_df = df.loc[(df[\"Age\"] > 30) & (df[\"Pclass\"] == 1), [\"Name\", \"Age\", \"Fare\", \"Survived\"]]\n\n# Query syntax for clean readable code\nhigh_fare = df.query(\"Fare > 100 and Sex == 'female'\")\n```\n\n---\n\n## 2. Split-Apply-Combine with `.groupby()`\n\nThe `groupby` operation splits data into subsets, applies an aggregation function, and combines results.\n\n```python\n# Grouping multiple aggregations\nagg_summary = df.groupby([\"Pclass\", \"Sex\"]).agg(\n    mean_age=(\"Age\", \"mean\"),\n    median_fare=(\"Fare\", \"median\"),\n    survival_rate=(\"Survived\", \"mean\"),\n    passenger_count=(\"PassengerId\", \"count\")\n).reset_index()\n\nprint(agg_summary)\n```\n\n---\n\n## 3. Reshaping: Pivoting & Melting\n\n- **`pivot_table()`**: Summarizes and flattens cross-tabulated data.\n- **`melt()`**: Unpivots DataFrame from wide format to long format (tidy data).\n\n---\n\n## 4. Memory Optimization Strategies\nWhen handling datasets that approach RAM limits:\n1. Downcast integer columns (`int64` $\\to$ `int32` or `int8`).\n2. Downcast float columns (`float64` $\\to$ `float32`).\n3. Convert low-cardinality text/object columns to `category` dtype.\n\n```python\ndef optimize_dtypes(df):\n    for col in df.columns:\n        if df[col].dtype == 'object' and df[col].nunique() / len(df) < 0.2:\n            df[col] = df[col].astype('category')\n        elif df[col].dtype == 'float64':\n            df[col] = pd.to_numeric(df[col], downcast='float')\n        elif df[col].dtype == 'int64':\n            df[col] = pd.to_numeric(df[col], downcast='integer')\n    return df\n```\n",
+  "frontmatter": {
+    "title": "Pandas Data Wrangling & Manipulation for ML",
+    "subject": "03-Data-Analysis",
+    "difficulty": "Beginner",
+    "tags": [
+      "pandas",
+      "data-wrangling",
+      "group-by",
+      "aggregation",
+      "memory-optimization"
+    ],
+    "prerequisites": [
+      "00-Python-for-ML"
+    ],
+    "description": "High-performance data manipulation with Pandas: vectorized operations, split-apply-combine GroupBy patterns, indexing techniques, and memory profiling."
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "id": "02-statistics-and-probability-01-probability-distributions-bayes",
+  "title": "Statistics, Probability & Bayes' Theorem for ML",
+  "subjectId": "02-Statistics-and-Probability",
+  "format": "markdown",
+  "fileName": "01-probability-distributions-bayes.md",
+  "relativePath": "content/02-Statistics-and-Probability/01-probability-distributions-bayes.md",
+  "difficulty": "Intermediate",
+  "tags": [
+    "statistics",
+    "probability",
+    "bayes-theorem",
+    "distributions",
+    "hypothesis-testing"
+  ],
+  "prerequisites": [
+    "01-Mathematics"
+  ],
+  "description": "Statistical rigor in Machine Learning: Probability axioms, Bayes' rule, random variables, key parametric distributions, Central Limit Theorem, and hypothesis testing.",
+  "estimatedMinutes": 3,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Statistics, Probability & Bayes' Theorem for ML",
+      "id": "statistics-probability-bayes-theorem-for-ml"
+    },
+    {
+      "level": 2,
+      "title": "1. Bayes' Theorem: The Foundation of Statistical Learning",
+      "id": "1-bayes-theorem-the-foundation-of-statistical-learning"
+    },
+    {
+      "level": 3,
+      "title": "Terminology",
+      "id": "terminology"
+    },
+    {
+      "level": 3,
+      "title": "Naive Bayes Classifier Formulation",
+      "id": "naive-bayes-classifier-formulation"
+    },
+    {
+      "level": 2,
+      "title": "2. Essential Probability Distributions",
+      "id": "2-essential-probability-distributions"
+    },
+    {
+      "level": 3,
+      "title": "1. Gaussian (Normal) Distribution $\\mathcal{N}(\\mu, \\sigma^2)$",
+      "id": "1-gaussian-normal-distribution-mathcal-n-mu-sigma-2"
+    },
+    {
+      "level": 3,
+      "title": "2. Bernoulli Distribution",
+      "id": "2-bernoulli-distribution"
+    },
+    {
+      "level": 3,
+      "title": "3. Binomial Distribution $\\mathcal{B}(n, p)$",
+      "id": "3-binomial-distribution-mathcal-b-n-p"
+    },
+    {
+      "level": 3,
+      "title": "4. Poisson Distribution $\\text{Pois}(\\lambda)$",
+      "id": "4-poisson-distribution-text-pois-lambda"
+    },
+    {
+      "level": 2,
+      "title": "3. The Central Limit Theorem (CLT)",
+      "id": "3-the-central-limit-theorem-clt"
+    },
+    {
+      "level": 1,
+      "title": "Simulate CLT from an exponential (heavily skewed) distribution",
+      "id": "simulate-clt-from-an-exponential-heavily-skewed-distribution"
+    },
+    {
+      "level": 2,
+      "title": "4. Maximum Likelihood Estimation (MLE) vs MAP",
+      "id": "4-maximum-likelihood-estimation-mle-vs-map"
+    },
+    {
+      "level": 3,
+      "title": "MLE (Frequentist Approach)",
+      "id": "mle-frequentist-approach"
+    },
+    {
+      "level": 3,
+      "title": "MAP (Maximum A Posteriori - Bayesian Approach)",
+      "id": "map-maximum-a-posteriori-bayesian-approach"
+    },
+    {
+      "level": 2,
+      "title": "5. Statistical Hypothesis Testing",
+      "id": "5-statistical-hypothesis-testing"
+    }
+  ],
+  "searchTokens": "Statistics, Probability & Bayes' Theorem for ML Statistical rigor in Machine Learning: Probability axioms, Bayes' rule, random variables, key parametric distributions, Central Limit Theorem, and hypothesis testing. statistics probability bayes-theorem distributions hypothesis-testing \n\n# Statistics, Probability & Bayes' Theorem for ML\n\nMachine Learning models make probabilistic inferences under uncertainty. Understanding distributions and Bayes' theorem enables you to reason about model confidence, generative models, maximum likelihood estimation (MLE), and classification.\n\n---\n\n## 1. Bayes' Theorem: The Foundation of Statistical Learning\n\nBayes' Theorem updates the probability of a hypothesis $H$ given observed evidence $E$:\n\n$$P(H \\mid E) = \\frac{P(E \\mid H) \\cdot P(H)}{P(E)}$$\n\n### Terminology\n- **Prior $P(H)$**: Initial belief before seeing data.\n- **Likelihood $P(E \\mid H)$**: Probability of observing data $E$ assuming hypothesis $H$ is true.\n- **Evidence / Marginal $P(E)$**: Total probability of the evidence across all hypotheses: $\\sum_k P(E \\mid H_k) P(H_k)$.\n- **Posterior $P(H \\mid E)$**: Updated belief after observing evidence $E$.\n\n### Naive Bayes Classifier Formulation\nGiven a feature vector $\\mathbf{x} = [x_1, x_2, \\dots, x_d]^T$ and class label $y \\in \\{C_1, \\dots, C_K\\}$:\n\n$$P(y = C_k \\mid \\mathbf{x}) \\propto P(y = C_k) \\prod_{j=1}^d P(x_j \\mid y = C_k)$$\n\nThe \"Naive\" assumption is that all features are **conditionally independent** given the class label.\n\n---\n\n## 2. Essential Probability Distributions\n\n### 1. Gaussian (Normal) Distribution $\\mathcal{N}(\\mu, \\sigma^2)$\nProbability Density Function (PDF):\n$$f(x) = \\frac{1}{\\sigma \\sqrt{2\\pi}} \\exp\\left( -\\frac{(x - \\mu)^2}{2\\sigma^2} \\right)$$\n- **68-95-99.7 Rule**: 68.2% within $1\\sigma$, 9",
+  "hasNotebook": false,
+  "sizeBytes": 4860,
+  "content": "\n\n# Statistics, Probability & Bayes' Theorem for ML\n\nMachine Learning models make probabilistic inferences under uncertainty. Understanding distributions and Bayes' theorem enables you to reason about model confidence, generative models, maximum likelihood estimation (MLE), and classification.\n\n---\n\n## 1. Bayes' Theorem: The Foundation of Statistical Learning\n\nBayes' Theorem updates the probability of a hypothesis $H$ given observed evidence $E$:\n\n$$P(H \\mid E) = \\frac{P(E \\mid H) \\cdot P(H)}{P(E)}$$\n\n### Terminology\n- **Prior $P(H)$**: Initial belief before seeing data.\n- **Likelihood $P(E \\mid H)$**: Probability of observing data $E$ assuming hypothesis $H$ is true.\n- **Evidence / Marginal $P(E)$**: Total probability of the evidence across all hypotheses: $\\sum_k P(E \\mid H_k) P(H_k)$.\n- **Posterior $P(H \\mid E)$**: Updated belief after observing evidence $E$.\n\n### Naive Bayes Classifier Formulation\nGiven a feature vector $\\mathbf{x} = [x_1, x_2, \\dots, x_d]^T$ and class label $y \\in \\{C_1, \\dots, C_K\\}$:\n\n$$P(y = C_k \\mid \\mathbf{x}) \\propto P(y = C_k) \\prod_{j=1}^d P(x_j \\mid y = C_k)$$\n\nThe \"Naive\" assumption is that all features are **conditionally independent** given the class label.\n\n---\n\n## 2. Essential Probability Distributions\n\n### 1. Gaussian (Normal) Distribution $\\mathcal{N}(\\mu, \\sigma^2)$\nProbability Density Function (PDF):\n$$f(x) = \\frac{1}{\\sigma \\sqrt{2\\pi}} \\exp\\left( -\\frac{(x - \\mu)^2}{2\\sigma^2} \\right)$$\n- **68-95-99.7 Rule**: 68.2% within $1\\sigma$, 95.4% within $2\\sigma$, 99.7% within $3\\sigma$.\n- Inherent in linear regression residual errors under MLE.\n\n### 2. Bernoulli Distribution\nModels binary outcomes (e.g., coin toss, binary classification $y \\in \\{0, 1\\}$):\n$$P(Y = y) = p^y (1 - p)^{1-y}$$\n\n### 3. Binomial Distribution $\\mathcal{B}(n, p)$\nProbability of observing $k$ successes in $n$ independent Bernoulli trials:\n$$P(K = k) = \\binom{n}{k} p^k (1 - p)^{n-k}$$\n\n### 4. Poisson Distribution $\\text{Pois}(\\lambda)$\nModels the count of rare events occurring in a fixed interval of time or space:\n$$P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}$$\n\n---\n\n## 3. The Central Limit Theorem (CLT)\n\n> [!IMPORTANT]\n> The CLT states that the sum (or average) of a sufficiently large number of independent and identically distributed (i.i.d.) random variables will be **approximately normally distributed**, regardless of the underlying distribution of the original population!\n\n```python\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Simulate CLT from an exponential (heavily skewed) distribution\nsample_means = []\npopulation = np.random.exponential(scale=2.0, size=100_000)\n\nfor _ in range(5000):\n    sample = np.random.choice(population, size=30, replace=False)\n    sample_means.append(np.mean(sample))\n\nprint(f\"Population Mean: {np.mean(population):.2f} (Theoretical: 2.00)\")\nprint(f\"Sample Means Mean: {np.mean(sample_means):.2f}\")\nprint(f\"Sample Means Std:  {np.std(sample_means):.2f} (Theoretical sigma/sqrt(n): {2.0/np.sqrt(30):.2f})\")\n```\n\n---\n\n## 4. Maximum Likelihood Estimation (MLE) vs MAP\n\n### MLE (Frequentist Approach)\nFind parameters $\\theta$ that maximize the probability of observed training data $\\mathcal{D}$:\n$$\\theta_{\\text{MLE}} = \\arg\\max_\\theta \\sum_{i=1}^m \\log P(x_i \\mid \\theta)$$\n\n### MAP (Maximum A Posteriori - Bayesian Approach)\nIncorporates a prior distribution $P(\\theta)$ over parameters:\n$$\\theta_{\\text{MAP}} = \\arg\\max_\\theta \\left( \\sum_{i=1}^m \\log P(x_i \\mid \\theta) + \\log P(\\theta) \\right)$$\n- When prior $P(\\theta) \\sim \\mathcal{N}(0, \\sigma^2)$, MAP equals **$L_2$ Ridge Regularization**.\n- When prior $P(\\theta) \\sim \\text{Laplace}(0, b)$, MAP equals **$L_1$ Lasso Regularization**.\n\n---\n\n## 5. Statistical Hypothesis Testing\n\n1. **Formulate Hypotheses**: $H_0$ (Null Hypothesis, no effect) vs $H_1$ (Alternative Hypothesis).\n2. **Select Significance Level ($\\alpha$)**: Usually $\\alpha = 0.05$ or $0.01$.\n3. **Compute Test Statistic**: e.g. Z-score, Student's t-statistic, $\\chi^2$ statistic.\n4. **Determine p-value**: Probability of observing data at least as extreme as observed, assuming $H_0$ is true.\n   - If $p \\le \\alpha \\implies$ Reject $H_0$ (Statistically significant).\n   - If $p > \\alpha \\implies$ Fail to reject $H_0$.\n\n> [!CAUTION]\n> **Type I Error ($\\alpha$)**: False Positive (rejecting true $H_0$).\n> **Type II Error ($\\beta$)**: False Negative (failing to reject false $H_0$). Power $= 1 - \\beta$.\n",
+  "frontmatter": {
+    "title": "Statistics, Probability & Bayes' Theorem for ML",
+    "subject": "02-Statistics-and-Probability",
+    "difficulty": "Intermediate",
+    "tags": [
+      "statistics",
+      "probability",
+      "bayes-theorem",
+      "distributions",
+      "hypothesis-testing"
+    ],
+    "prerequisites": [
+      "01-Mathematics"
+    ],
+    "description": "Statistical rigor in Machine Learning: Probability axioms, Bayes' rule, random variables, key parametric distributions, Central Limit Theorem, and hypothesis testing."
+  }
+}

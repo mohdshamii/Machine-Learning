@@ -1,0 +1,90 @@
+{
+  "id": "14-computer-vision-01-cnn-architectures-and-vision",
+  "title": "Computer Vision: Convolutional Neural Networks & ResNet",
+  "subjectId": "14-Computer-Vision",
+  "format": "markdown",
+  "fileName": "01-cnn-architectures-and-vision.md",
+  "relativePath": "content/14-Computer-Vision/01-cnn-architectures-and-vision.md",
+  "difficulty": "Advanced",
+  "tags": [
+    "computer-vision",
+    "cnn",
+    "convolutions",
+    "resnet",
+    "pooling",
+    "transfer-learning"
+  ],
+  "prerequisites": [
+    "11-Deep-Learning"
+  ],
+  "description": "Master Computer Vision architectures: 2D convolutions, receptive fields, spatial dimensions, pooling operations, ResNet residual skip connections, and transfer learning.",
+  "estimatedMinutes": 2,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Computer Vision: CNN Architectures & Convolutions",
+      "id": "computer-vision-cnn-architectures-convolutions"
+    },
+    {
+      "level": 2,
+      "title": "1. The 2D Convolution Operation",
+      "id": "1-the-2d-convolution-operation"
+    },
+    {
+      "level": 3,
+      "title": "Output Spatial Dimensions Formula",
+      "id": "output-spatial-dimensions-formula"
+    },
+    {
+      "level": 2,
+      "title": "2. Pooling & Receptive Field",
+      "id": "2-pooling-receptive-field"
+    },
+    {
+      "level": 2,
+      "title": "3. ResNet & The Residual Learning Principle (He et al., 2015)",
+      "id": "3-resnet-the-residual-learning-principle-he-et-al-2015"
+    },
+    {
+      "level": 2,
+      "title": "4. Transfer Learning in Computer Vision",
+      "id": "4-transfer-learning-in-computer-vision"
+    },
+    {
+      "level": 1,
+      "title": "Load pre-trained ResNet-50",
+      "id": "load-pre-trained-resnet-50"
+    },
+    {
+      "level": 1,
+      "title": "Freeze convolutional feature extraction backbone",
+      "id": "freeze-convolutional-feature-extraction-backbone"
+    },
+    {
+      "level": 1,
+      "title": "Replace classification head with custom number of classes",
+      "id": "replace-classification-head-with-custom-number-of-classes"
+    }
+  ],
+  "searchTokens": "Computer Vision: Convolutional Neural Networks & ResNet Master Computer Vision architectures: 2D convolutions, receptive fields, spatial dimensions, pooling operations, ResNet residual skip connections, and transfer learning. computer-vision cnn convolutions resnet pooling transfer-learning \n\n# Computer Vision: CNN Architectures & Convolutions\n\nFully connected networks fail on high-resolution image data because parameter counts explode (a $1000 \\times 1000$ RGB image with a 1000-neuron layer requires $3 \\times 10^9$ weights) and fail to capture spatial translation invariance. Convolutional Neural Networks (CNNs) solve this using **local connectivity** and **weight sharing**.\n\n---\n\n## 1. The 2D Convolution Operation\n\nGiven an input feature map $\\mathbf{X}$ and a kernel (filter) $\\mathbf{K} \\in \\mathbb{R}^{k_h \\times k_w}$:\n\n$$S(i, j) = (\\mathbf{X} * \\mathbf{K})(i, j) = \\sum_{m} \\sum_{n} X(i + m, j + n) K(m, n)$$\n\n### Output Spatial Dimensions Formula\nGiven input height $W$, filter size $F$, padding $P$, and stride $S$:\n\n$$W_{\\text{out}} = \\left\\lfloor \\frac{W - F + 2P}{S} \\right\\rfloor + 1$$\n\n- **Stride ($S$)**: Step size of the kernel slide across the image.\n- **Padding ($P$)**: Zero-padding borders to preserve spatial dimensions (\"same\" padding: $P = \\frac{F-1}{2}$ for odd $F$ with $S=1$).\n\n---\n\n## 2. Pooling & Receptive Field\n\n- **Max Pooling**: Downsamples spatial dimensions by taking the maximum value in each $2 \\times 2$ window (stride 2), reducing computational footprint and imparting translation invariance.\n- **Global Average Pooling (GAP)**: Averages each feature map across all spatial dimensions ($H \\times W \\to 1$), drastically reducing parameters before dense classification heads.\n\n---\n\n## 3. ResNet & The Residual Learning Principle (He et al., 2015)\n",
+  "hasNotebook": false,
+  "sizeBytes": 3202,
+  "content": "\n\n# Computer Vision: CNN Architectures & Convolutions\n\nFully connected networks fail on high-resolution image data because parameter counts explode (a $1000 \\times 1000$ RGB image with a 1000-neuron layer requires $3 \\times 10^9$ weights) and fail to capture spatial translation invariance. Convolutional Neural Networks (CNNs) solve this using **local connectivity** and **weight sharing**.\n\n---\n\n## 1. The 2D Convolution Operation\n\nGiven an input feature map $\\mathbf{X}$ and a kernel (filter) $\\mathbf{K} \\in \\mathbb{R}^{k_h \\times k_w}$:\n\n$$S(i, j) = (\\mathbf{X} * \\mathbf{K})(i, j) = \\sum_{m} \\sum_{n} X(i + m, j + n) K(m, n)$$\n\n### Output Spatial Dimensions Formula\nGiven input height $W$, filter size $F$, padding $P$, and stride $S$:\n\n$$W_{\\text{out}} = \\left\\lfloor \\frac{W - F + 2P}{S} \\right\\rfloor + 1$$\n\n- **Stride ($S$)**: Step size of the kernel slide across the image.\n- **Padding ($P$)**: Zero-padding borders to preserve spatial dimensions (\"same\" padding: $P = \\frac{F-1}{2}$ for odd $F$ with $S=1$).\n\n---\n\n## 2. Pooling & Receptive Field\n\n- **Max Pooling**: Downsamples spatial dimensions by taking the maximum value in each $2 \\times 2$ window (stride 2), reducing computational footprint and imparting translation invariance.\n- **Global Average Pooling (GAP)**: Averages each feature map across all spatial dimensions ($H \\times W \\to 1$), drastically reducing parameters before dense classification heads.\n\n---\n\n## 3. ResNet & The Residual Learning Principle (He et al., 2015)\n\nPrior to ResNet, stacking deeper layers caused accuracy degradation (vanishing/exploding gradients and optimization degradation). ResNet introduced **residual skip connections**:\n\n$$\\mathbf{y} = \\mathcal{F}(\\mathbf{x}, \\{W_i\\}) + \\mathbf{x}$$\n\nInstead of forcing layers to fit an underlying mapping $\\mathcal{H}(\\mathbf{x})$, the layers fit a residual mapping $\\mathcal{F}(\\mathbf{x}) = \\mathcal{H}(\\mathbf{x}) - \\mathbf{x}$.\n- If an identity mapping is optimal, the optimizer simply drives weights $\\mathcal{F} \\to 0$.\n- Gradients flow directly back through the identity skip connection without attenuation during backpropagation.\n\n---\n\n## 4. Transfer Learning in Computer Vision\n\nInstead of training a vision model from scratch on small datasets, fine-tune a model pre-trained on ImageNet ($1.4\\text{M}$ images, $1000$ classes):\n\n```python\nimport torchvision.models as models\nimport torch.nn as nn\n\n# Load pre-trained ResNet-50\nmodel = models.resnet50(weights=models.ResNet50_Weights.DEFAULT)\n\n# Freeze convolutional feature extraction backbone\nfor param in model.parameters():\n    param.requires_grad = False\n\n# Replace classification head with custom number of classes\nnum_ftrs = model.fc.in_features\nmodel.fc = nn.Linear(num_ftrs, 10) # 10 custom classes\n```\n",
+  "frontmatter": {
+    "title": "Computer Vision: Convolutional Neural Networks & ResNet",
+    "subject": "14-Computer-Vision",
+    "difficulty": "Advanced",
+    "tags": [
+      "computer-vision",
+      "cnn",
+      "convolutions",
+      "resnet",
+      "pooling",
+      "transfer-learning"
+    ],
+    "prerequisites": [
+      "11-Deep-Learning"
+    ],
+    "description": "Master Computer Vision architectures: 2D convolutions, receptive fields, spatial dimensions, pooling operations, ResNet residual skip connections, and transfer learning."
+  }
+}

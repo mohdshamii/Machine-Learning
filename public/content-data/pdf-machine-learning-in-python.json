@@ -1,0 +1,27 @@
+{
+  "id": "pdf-machine-learning-in-python",
+  "title": "Machine Learning in Python (Reference PDF)",
+  "subjectId": "00-Python-for-ML",
+  "format": "pdf",
+  "fileName": "Machine Learning in Python.pdf",
+  "relativePath": "Machine Learning in Python.pdf",
+  "githubBlobUrl": "https://github.com/codexshami/MLVault/blob/main/Machine%20Learning%20in%20Python.pdf",
+  "githubRawUrl": "https://github.com/codexshami/MLVault/raw/main/Machine%20Learning%20in%20Python.pdf",
+  "difficulty": "Reference",
+  "tags": [
+    "pdf",
+    "notes",
+    "handbook",
+    "reference"
+  ],
+  "prerequisites": [],
+  "description": "Original study notes and PDF reference document (1.1 MB).",
+  "estimatedMinutes": 5,
+  "headings": [],
+  "searchTokens": "Machine Learning in Python pdf notes reference 00-Python-for-ML",
+  "hasNotebook": false,
+  "sizeBytes": 1138784,
+  "sizeMB": 1.09,
+  "pdfUrl": "https://github.com/codexshami/MLVault/raw/main/Machine%20Learning%20in%20Python.pdf",
+  "localPath": "Machine Learning in Python.pdf"
+}

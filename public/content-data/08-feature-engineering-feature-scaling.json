@@ -1,0 +1,389 @@
+{
+  "id": "08-feature-engineering-feature-scaling",
+  "title": "Feature Scaling",
+  "subjectId": "08-Feature-Engineering",
+  "format": "notebook",
+  "fileName": "feature scaling.ipynb",
+  "relativePath": "feature scaling/feature scaling.ipynb",
+  "difficulty": "Intermediate",
+  "tags": [
+    "feature scaling",
+    "feature engineering",
+    "normalization",
+    "standardization"
+  ],
+  "prerequisites": [],
+  "description": "Interactive Jupyter notebook covering Feature Scaling. Contains 13 executable code cells and 0 explanation sections.",
+  "estimatedMinutes": 20,
+  "cellCount": 13,
+  "codeCellCount": 13,
+  "headings": [],
+  "searchTokens": "Feature Scaling Interactive Jupyter notebook covering Feature Scaling. Contains 13 executable code cells and 0 explanation sections. feature engineering feature scaling normalization standardization import pandas as pd df = pd.read_csv('SampleFile.csv') df.head() df.info() import numpy as np\nmax_vals = np.max(np.abs(df))\nmax_vals print((df - max_vals) / max_vals) #MinMax Scaling from sklearn.preprocessing import MinMaxScaler\n\nscaler = MinMaxScaler()\nscaled_data = scaler.fit_transform(df)\nscaled_df = pd.DataFrame(scaled_data, \n                         columns=df.columns)\nscaled_df.head() #Normalisation\nfrom sklearn.preprocessing import Normalizer\n\nscaler = Normalizer()\nscaled_data = scaler.fit_transform(df)\nscaled_df = pd.DataFrame(scaled_data,\n                         columns=df.columns)\nprint(scaled_df.head()) #Standarisation\n\nfrom sklearn.preprocessing import StandardScaler\n\nscaler = StandardScaler()\nscaled_data = scaler.fit_transform(df)\nscaled_df = pd.DataFrame(scaled_data,\n                         columns=df.columns)\nprint(scaled_df.head())",
+  "hasNotebook": true,
+  "sizeBytes": 9864,
+  "cells": [
+    {
+      "id": "cell-0",
+      "cell_type": "code",
+      "execution_count": 1,
+      "source": "import pandas as pd",
+      "outputs": [],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-1",
+      "cell_type": "code",
+      "execution_count": 2,
+      "source": "df = pd.read_csv('SampleFile.csv')",
+      "outputs": [],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-2",
+      "cell_type": "code",
+      "execution_count": 3,
+      "source": "df.head()",
+      "outputs": [
+        {
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>LotArea</th>\n",
+              "      <th>MSSubClass</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>8450</td>\n",
+              "      <td>60</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>9600</td>\n",
+              "      <td>20</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>11250</td>\n",
+              "      <td>60</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>9550</td>\n",
+              "      <td>70</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>14260</td>\n",
+              "      <td>60</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "   LotArea  MSSubClass\n",
+              "0     8450          60\n",
+              "1     9600          20\n",
+              "2    11250          60\n",
+              "3     9550          70\n",
+              "4    14260          60"
+            ]
+          },
+          "execution_count": 3,
+          "metadata": {},
+          "output_type": "execute_result"
+        }
+      ],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-3",
+      "cell_type": "code",
+      "execution_count": 4,
+      "source": "df.info()",
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "<class 'pandas.core.frame.DataFrame'>\n",
+            "RangeIndex: 1460 entries, 0 to 1459\n",
+            "Data columns (total 2 columns):\n",
+            " #   Column      Non-Null Count  Dtype\n",
+            "---  ------      --------------  -----\n",
+            " 0   LotArea     1460 non-null   int64\n",
+            " 1   MSSubClass  1460 non-null   int64\n",
+            "dtypes: int64(2)\n",
+            "memory usage: 22.9 KB\n"
+          ]
+        }
+      ],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-4",
+      "cell_type": "code",
+      "execution_count": 5,
+      "source": "import numpy as np\nmax_vals = np.max(np.abs(df))\nmax_vals",
+      "outputs": [
+        {
+          "data": {
+            "text/plain": [
+              "215245"
+            ]
+          },
+          "execution_count": 5,
+          "metadata": {},
+          "output_type": "execute_result"
+        }
+      ],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-5",
+      "cell_type": "code",
+      "execution_count": 6,
+      "source": "print((df - max_vals) / max_vals)",
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "       LotArea  MSSubClass\n",
+            "0    -0.960742   -0.999721\n",
+            "1    -0.955400   -0.999907\n",
+            "2    -0.947734   -0.999721\n",
+            "3    -0.955632   -0.999675\n",
+            "4    -0.933750   -0.999721\n",
+            "...        ...         ...\n",
+            "1455 -0.963219   -0.999721\n",
+            "1456 -0.938791   -0.999907\n",
+            "1457 -0.957992   -0.999675\n",
+            "1458 -0.954856   -0.999907\n",
+            "1459 -0.953834   -0.999907\n",
+            "\n",
+            "[1460 rows x 2 columns]\n"
+          ]
+        }
+      ],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-6",
+      "cell_type": "code",
+      "execution_count": 7,
+      "source": "#MinMax Scaling",
+      "outputs": [],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-7",
+      "cell_type": "code",
+      "execution_count": 8,
+      "source": "from sklearn.preprocessing import MinMaxScaler\n\nscaler = MinMaxScaler()\nscaled_data = scaler.fit_transform(df)\nscaled_df = pd.DataFrame(scaled_data, \n                         columns=df.columns)\nscaled_df.head()",
+      "outputs": [
+        {
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>LotArea</th>\n",
+              "      <th>MSSubClass</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>0.033420</td>\n",
+              "      <td>0.235294</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>0.038795</td>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>0.046507</td>\n",
+              "      <td>0.235294</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>0.038561</td>\n",
+              "      <td>0.294118</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>0.060576</td>\n",
+              "      <td>0.235294</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    LotArea  MSSubClass\n",
+              "0  0.033420    0.235294\n",
+              "1  0.038795    0.000000\n",
+              "2  0.046507    0.235294\n",
+              "3  0.038561    0.294118\n",
+              "4  0.060576    0.235294"
+            ]
+          },
+          "execution_count": 8,
+          "metadata": {},
+          "output_type": "execute_result"
+        }
+      ],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-8",
+      "cell_type": "code",
+      "execution_count": 9,
+      "source": "#Normalisation\nfrom sklearn.preprocessing import Normalizer\n\nscaler = Normalizer()\nscaled_data = scaler.fit_transform(df)\nscaled_df = pd.DataFrame(scaled_data,\n                         columns=df.columns)\nprint(scaled_df.head())",
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "    LotArea  MSSubClass\n",
+            "0  0.999975    0.007100\n",
+            "1  0.999998    0.002083\n",
+            "2  0.999986    0.005333\n",
+            "3  0.999973    0.007330\n",
+            "4  0.999991    0.004208\n"
+          ]
+        }
+      ],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-9",
+      "cell_type": "code",
+      "execution_count": 10,
+      "source": "#Standarisation\n\nfrom sklearn.preprocessing import StandardScaler\n\nscaler = StandardScaler()\nscaled_data = scaler.fit_transform(df)\nscaled_df = pd.DataFrame(scaled_data,\n                         columns=df.columns)\nprint(scaled_df.head())",
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "    LotArea  MSSubClass\n",
+            "0 -0.207142    0.073375\n",
+            "1 -0.091886   -0.872563\n",
+            "2  0.073480    0.073375\n",
+            "3 -0.096897    0.309859\n",
+            "4  0.375148    0.073375\n"
+          ]
+        }
+      ],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-10",
+      "cell_type": "code",
+      "execution_count": 11,
+      "source": "#Robust Scalling",
+      "outputs": [],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-11",
+      "cell_type": "code",
+      "execution_count": 12,
+      "source": "from sklearn.preprocessing import RobustScaler\n\nscaler = RobustScaler()\nscaled_data = scaler.fit_transform(df)\nscaled_df = pd.DataFrame(scaled_data,\n                         columns=df.columns)\nprint(scaled_df.head())",
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "    LotArea  MSSubClass\n",
+            "0 -0.254076         0.2\n",
+            "1  0.030015        -0.6\n",
+            "2  0.437624         0.2\n",
+            "3  0.017663         0.4\n",
+            "4  1.181201         0.2\n"
+          ]
+        }
+      ],
+      "metadata": {},
+      "attachments": {}
+    },
+    {
+      "id": "cell-12",
+      "cell_type": "code",
+      "execution_count": null,
+      "source": "",
+      "outputs": [],
+      "metadata": {},
+      "attachments": {}
+    }
+  ],
+  "nbformat": 4,
+  "nbformat_minor": 5,
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3 (ipykernel)",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.10.9"
+    }
+  }
+}

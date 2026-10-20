@@ -1,0 +1,96 @@
+{
+  "id": "13-nlp-01-nlp-foundations-to-transformers",
+  "title": "Natural Language Processing: From Tokenization to Transformers",
+  "subjectId": "13-NLP",
+  "format": "markdown",
+  "fileName": "01-nlp-foundations-to-transformers.md",
+  "relativePath": "content/13-NLP/01-nlp-foundations-to-transformers.md",
+  "difficulty": "Advanced",
+  "tags": [
+    "nlp",
+    "tokenization",
+    "tf-idf",
+    "word2vec",
+    "transformers",
+    "attention-mechanism",
+    "bert",
+    "gpt"
+  ],
+  "prerequisites": [
+    "11-Deep-Learning",
+    "12-Neural-Networks"
+  ],
+  "description": "The complete natural language processing journey: Byte-Pair Encoding (BPE), distributional semantics with Word2Vec, Scaled Dot-Product Attention, and Transformer architectures.",
+  "estimatedMinutes": 2,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Natural Language Processing: Foundations to Transformers",
+      "id": "natural-language-processing-foundations-to-transformers"
+    },
+    {
+      "level": 2,
+      "title": "1. Classical NLP: Tokenization & TF-IDF",
+      "id": "1-classical-nlp-tokenization-tf-idf"
+    },
+    {
+      "level": 3,
+      "title": "Term Frequency - Inverse Document Frequency (TF-IDF)",
+      "id": "term-frequency-inverse-document-frequency-tf-idf"
+    },
+    {
+      "level": 2,
+      "title": "2. Distributed Representations: Word2Vec",
+      "id": "2-distributed-representations-word2vec"
+    },
+    {
+      "level": 3,
+      "title": "Word2Vec Architectures (Mikolov et al., 2013)",
+      "id": "word2vec-architectures-mikolov-et-al-2013"
+    },
+    {
+      "level": 2,
+      "title": "3. The Transformer & Attention Mechanism (Vaswani et al., 2017)",
+      "id": "3-the-transformer-attention-mechanism-vaswani-et-al-2017"
+    },
+    {
+      "level": 3,
+      "title": "Scaled Dot-Product Attention",
+      "id": "scaled-dot-product-attention"
+    },
+    {
+      "level": 3,
+      "title": "Multi-Head Attention",
+      "id": "multi-head-attention"
+    },
+    {
+      "level": 2,
+      "title": "4. Architectural Taxonomy",
+      "id": "4-architectural-taxonomy"
+    }
+  ],
+  "searchTokens": "Natural Language Processing: From Tokenization to Transformers The complete natural language processing journey: Byte-Pair Encoding (BPE), distributional semantics with Word2Vec, Scaled Dot-Product Attention, and Transformer architectures. nlp tokenization tf-idf word2vec transformers attention-mechanism bert gpt \n\n# Natural Language Processing: Foundations to Transformers\n\nNatural Language Processing (NLP) converts human linguistic tokens into rich continuous vector spaces and models sequence dependencies.\n\n---\n\n## 1. Classical NLP: Tokenization & TF-IDF\n\n### Term Frequency - Inverse Document Frequency (TF-IDF)\nMeasures the importance of a term $t$ in document $d$ relative to corpus $D$:\n\n$$\\text{TF}(t, d) = \\frac{\\text{count}(t, d)}{\\sum_{t' \\in d} \\text{count}(t', d)}$$\n\n$$\\text{IDF}(t, D) = \\log\\left( \\frac{1 + |D|}{1 + |\\{d \\in D : t \\in d\\}|} \\right) + 1$$\n\n$$\\text{TF-IDF}(t, d, D) = \\text{TF}(t, d) \\times \\text{IDF}(t, D)$$\n\nWords appearing in nearly every document (e.g. \"the\", \"is\") receive an IDF near zero, while domain-specific keywords receive high weights.\n\n---\n\n## 2. Distributed Representations: Word2Vec\n\nThe distributional hypothesis states: *\"You shall know a word by the company it keeps\"* (Firth, 1957).\n\n### Word2Vec Architectures (Mikolov et al., 2013)\n- **CBOW (Continuous Bag of Words)**: Predicts the target word given surrounding context words. Fast to train, slightly better for frequent words.\n- **Skip-Gram**: Predicts surrounding context words given the target word. Better for small datasets and rare words.\n\nVector arithmetic captures semantic analogies:\n$$\\text{vector}(\"King\") - \\text{vector}(\"Man\") + \\text{vector}(\"Woman\") \\approx \\text{vector}(\"Queen\")$$\n\n---\n\n## 3. The Transformer & Attention Mechanism (Vaswani et al., 2017)\n\nRecurrent Neural Networks (RNNs/LS",
+  "hasNotebook": false,
+  "sizeBytes": 3769,
+  "content": "\n\n# Natural Language Processing: Foundations to Transformers\n\nNatural Language Processing (NLP) converts human linguistic tokens into rich continuous vector spaces and models sequence dependencies.\n\n---\n\n## 1. Classical NLP: Tokenization & TF-IDF\n\n### Term Frequency - Inverse Document Frequency (TF-IDF)\nMeasures the importance of a term $t$ in document $d$ relative to corpus $D$:\n\n$$\\text{TF}(t, d) = \\frac{\\text{count}(t, d)}{\\sum_{t' \\in d} \\text{count}(t', d)}$$\n\n$$\\text{IDF}(t, D) = \\log\\left( \\frac{1 + |D|}{1 + |\\{d \\in D : t \\in d\\}|} \\right) + 1$$\n\n$$\\text{TF-IDF}(t, d, D) = \\text{TF}(t, d) \\times \\text{IDF}(t, D)$$\n\nWords appearing in nearly every document (e.g. \"the\", \"is\") receive an IDF near zero, while domain-specific keywords receive high weights.\n\n---\n\n## 2. Distributed Representations: Word2Vec\n\nThe distributional hypothesis states: *\"You shall know a word by the company it keeps\"* (Firth, 1957).\n\n### Word2Vec Architectures (Mikolov et al., 2013)\n- **CBOW (Continuous Bag of Words)**: Predicts the target word given surrounding context words. Fast to train, slightly better for frequent words.\n- **Skip-Gram**: Predicts surrounding context words given the target word. Better for small datasets and rare words.\n\nVector arithmetic captures semantic analogies:\n$$\\text{vector}(\"King\") - \\text{vector}(\"Man\") + \\text{vector}(\"Woman\") \\approx \\text{vector}(\"Queen\")$$\n\n---\n\n## 3. The Transformer & Attention Mechanism (Vaswani et al., 2017)\n\nRecurrent Neural Networks (RNNs/LSTMs) process tokens sequentially ($\\mathcal{O}(n)$ time dependency), preventing parallelization across sequence length $n$ and suffering from catastrophic forgetting across long contexts. The **Transformer** replaces recurrence entirely with **Self-Attention**.\n\n### Scaled Dot-Product Attention\nGiven Query $\\mathbf{Q} \\in \\mathbb{R}^{n \\times d_k}$, Key $\\mathbf{K} \\in \\mathbb{R}^{m \\times d_k}$, and Value $\\mathbf{V} \\in \\mathbb{R}^{m \\times d_v}$:\n\n$$\\text{Attention}(\\mathbf{Q}, \\mathbf{K}, \\mathbf{V}) = \\text{softmax}\\left( \\frac{\\mathbf{Q}\\mathbf{K}^T}{\\sqrt{d_k}} \\right) \\mathbf{V}$$\n\n- The dot product $\\mathbf{Q}\\mathbf{K}^T$ computes pairwise token similarity scores.\n- Scaling factor $\\frac{1}{\\sqrt{d_k}}$ prevents dot products from growing excessively large in high dimensions, which would push softmax into regions with vanishing gradients.\n- Softmax turns raw scores into probability distribution weights summing to 1.\n\n### Multi-Head Attention\nInstead of a single attention function, project Queries, Keys, and Values $h$ times with different learned parameter matrices:\n\n$$\\text{MultiHead}(\\mathbf{Q}, \\mathbf{K}, \\mathbf{V}) = \\text{Concat}(\\text{head}_1, \\dots, \\text{head}_h) \\mathbf{W}^O$$\n$$\\text{head}_i = \\text{Attention}(\\mathbf{Q}\\mathbf{W}_i^Q, \\mathbf{K}\\mathbf{W}_i^K, \\mathbf{V}\\mathbf{W}_i^V)$$\n\n---\n\n## 4. Architectural Taxonomy\n\n```text\nTransformers\n├── Encoder-Only (e.g., BERT, RoBERTa)\n│   └── Bidirectional attention: ideal for classification, NER, extractive QA.\n├── Decoder-Only (e.g., GPT-3/4, LLaMA, Mistral)\n│   └── Causal (masked) attention: ideal for autoregressive text generation, chat, reasoning.\n└── Encoder-Decoder (e.g., T5, BART)\n    └── Cross-attention: ideal for translation, summarization.\n```\n",
+  "frontmatter": {
+    "title": "Natural Language Processing: From Tokenization to Transformers",
+    "subject": "13-NLP",
+    "difficulty": "Advanced",
+    "tags": [
+      "nlp",
+      "tokenization",
+      "tf-idf",
+      "word2vec",
+      "transformers",
+      "attention-mechanism",
+      "bert",
+      "gpt"
+    ],
+    "prerequisites": [
+      "11-Deep-Learning",
+      "12-Neural-Networks"
+    ],
+    "description": "The complete natural language processing journey: Byte-Pair Encoding (BPE), distributional semantics with Word2Vec, Scaled Dot-Product Attention, and Transformer architectures."
+  }
+}

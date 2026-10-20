@@ -1,0 +1,70 @@
+{
+  "id": "15-time-series-01-time-series-forecasting",
+  "title": "Time Series Analysis & Forecasting: ARIMA to Prophet",
+  "subjectId": "15-Time-Series",
+  "format": "markdown",
+  "fileName": "01-time-series-forecasting.md",
+  "relativePath": "content/15-Time-Series/01-time-series-forecasting.md",
+  "difficulty": "Intermediate",
+  "tags": [
+    "time-series",
+    "forecasting",
+    "arima",
+    "seasonality",
+    "stationarity",
+    "acf-pacf"
+  ],
+  "prerequisites": [
+    "02-Statistics-and-Probability"
+  ],
+  "description": "Statistical time series forecasting: stationarity testing (ADF), differencing, autocorrelation (ACF/PACF), ARIMA/SARIMA models, and Facebook Prophet.",
+  "estimatedMinutes": 2,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Time Series Analysis & Forecasting",
+      "id": "time-series-analysis-forecasting"
+    },
+    {
+      "level": 2,
+      "title": "1. Stationarity & The Augmented Dickey-Fuller (ADF) Test",
+      "id": "1-stationarity-the-augmented-dickey-fuller-adf-test"
+    },
+    {
+      "level": 3,
+      "title": "Augmented Dickey-Fuller (ADF) Test",
+      "id": "augmented-dickey-fuller-adf-test"
+    },
+    {
+      "level": 2,
+      "title": "2. Autoregressive Integrated Moving Average (ARIMA)",
+      "id": "2-autoregressive-integrated-moving-average-arima"
+    },
+    {
+      "level": 3,
+      "title": "Identifying Orders with ACF and PACF",
+      "id": "identifying-orders-with-acf-and-pacf"
+    }
+  ],
+  "searchTokens": "Time Series Analysis & Forecasting: ARIMA to Prophet Statistical time series forecasting: stationarity testing (ADF), differencing, autocorrelation (ACF/PACF), ARIMA/SARIMA models, and Facebook Prophet. time-series forecasting arima seasonality stationarity acf-pacf \n\n# Time Series Analysis & Forecasting\n\nTime series data violates the independent and identically distributed (i.i.d.) assumption of standard machine learning. Observations exhibit temporal autocorrelation where past states predict future states.\n\n---\n\n## 1. Stationarity & The Augmented Dickey-Fuller (ADF) Test\n\nA time series $\\{Y_t\\}$ is **strictly stationary** if its joint distribution does not change over time. It is **weakly (covariance) stationary** if:\n1. Mean $\\mathbb{E}[Y_t] = \\mu$ is constant over time.\n2. Variance $\\text{Var}(Y_t) = \\sigma^2$ is constant over time.\n3. Autocovariance $\\text{Cov}(Y_t, Y_{t+k})$ depends only on the lag $k$, not on time $t$.\n\n### Augmented Dickey-Fuller (ADF) Test\n- $H_0$: The series possesses a unit root (non-stationary).\n- $H_1$: The series has no unit root (stationary).\n- If p-value $< 0.05 \\implies$ Reject $H_0$, series is stationary!\n\n```python\nfrom statsmodels.tsa.stattools import adfuller\n\ndef check_stationarity(series):\n    result = adfuller(series.dropna())\n    print(f\"ADF Statistic: {result[0]:.4f}\")\n    print(f\"p-value: {result[1]:.4f}\")\n    if result[1] <= 0.05:\n        print(\"=> Series is Stationary\")\n    else:\n        print(\"=> Series is Non-Stationary (Needs differencing)\")\n```\n\n---\n\n## 2. Autoregressive Integrated Moving Average (ARIMA)\n\n$\\text{ARIMA}(p, d, q)$ consists of three components:\n- **$p$ (Autoregression - AR)**: Number of lagged observations used:\n  $$Y_t = c + \\phi_1 Y_{t-1} + \\dots + \\phi_p Y_{t-p} + \\epsilo",
+  "hasNotebook": false,
+  "sizeBytes": 2543,
+  "content": "\n\n# Time Series Analysis & Forecasting\n\nTime series data violates the independent and identically distributed (i.i.d.) assumption of standard machine learning. Observations exhibit temporal autocorrelation where past states predict future states.\n\n---\n\n## 1. Stationarity & The Augmented Dickey-Fuller (ADF) Test\n\nA time series $\\{Y_t\\}$ is **strictly stationary** if its joint distribution does not change over time. It is **weakly (covariance) stationary** if:\n1. Mean $\\mathbb{E}[Y_t] = \\mu$ is constant over time.\n2. Variance $\\text{Var}(Y_t) = \\sigma^2$ is constant over time.\n3. Autocovariance $\\text{Cov}(Y_t, Y_{t+k})$ depends only on the lag $k$, not on time $t$.\n\n### Augmented Dickey-Fuller (ADF) Test\n- $H_0$: The series possesses a unit root (non-stationary).\n- $H_1$: The series has no unit root (stationary).\n- If p-value $< 0.05 \\implies$ Reject $H_0$, series is stationary!\n\n```python\nfrom statsmodels.tsa.stattools import adfuller\n\ndef check_stationarity(series):\n    result = adfuller(series.dropna())\n    print(f\"ADF Statistic: {result[0]:.4f}\")\n    print(f\"p-value: {result[1]:.4f}\")\n    if result[1] <= 0.05:\n        print(\"=> Series is Stationary\")\n    else:\n        print(\"=> Series is Non-Stationary (Needs differencing)\")\n```\n\n---\n\n## 2. Autoregressive Integrated Moving Average (ARIMA)\n\n$\\text{ARIMA}(p, d, q)$ consists of three components:\n- **$p$ (Autoregression - AR)**: Number of lagged observations used:\n  $$Y_t = c + \\phi_1 Y_{t-1} + \\dots + \\phi_p Y_{t-p} + \\epsilon_t$$\n- **$d$ (Integrated - I)**: Number of differences needed to make the series stationary ($Y'_t = Y_t - Y_{t-1}$).\n- **$q$ (Moving Average - MA)**: Number of lagged forecast error terms:\n  $$Y_t = \\mu + \\epsilon_t + \\theta_1 \\epsilon_{t-1} + \\dots + \\theta_q \\epsilon_{t-q}$$\n\n### Identifying Orders with ACF and PACF\n- **Autocorrelation Function (ACF)**: Total correlation between $Y_t$ and $Y_{t-k}$. Cuts off at lag $q$ for MA($q$) processes.\n- **Partial Autocorrelation Function (PACF)**: Direct correlation between $Y_t$ and $Y_{t-k}$ removing intermediate effects. Cuts off at lag $p$ for AR($p$) processes.\n",
+  "frontmatter": {
+    "title": "Time Series Analysis & Forecasting: ARIMA to Prophet",
+    "subject": "15-Time-Series",
+    "difficulty": "Intermediate",
+    "tags": [
+      "time-series",
+      "forecasting",
+      "arima",
+      "seasonality",
+      "stationarity",
+      "acf-pacf"
+    ],
+    "prerequisites": [
+      "02-Statistics-and-Probability"
+    ],
+    "description": "Statistical time series forecasting: stationarity testing (ADF), differencing, autocorrelation (ACF/PACF), ARIMA/SARIMA models, and Facebook Prophet."
+  }
+}

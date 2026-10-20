@@ -1,0 +1,115 @@
+{
+  "id": "06-supervised-learning-01-linear-logistic-regression",
+  "title": "Supervised Learning: Linear & Logistic Regression from Scratch",
+  "subjectId": "06-Supervised-Learning",
+  "format": "markdown",
+  "fileName": "01-linear-logistic-regression.md",
+  "relativePath": "content/06-Supervised-Learning/01-linear-logistic-regression.md",
+  "difficulty": "Intermediate",
+  "tags": [
+    "supervised",
+    "linear-regression",
+    "logistic-regression",
+    "gradient-descent",
+    "from-scratch"
+  ],
+  "prerequisites": [
+    "01-Mathematics",
+    "04-Data-Preprocessing"
+  ],
+  "description": "Derive and implement Linear and Logistic Regression from first principles: Ordinary Least Squares, cross-entropy loss, gradient descent mathematics, and regularization.",
+  "estimatedMinutes": 3,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Supervised Learning: Linear & Logistic Regression",
+      "id": "supervised-learning-linear-logistic-regression"
+    },
+    {
+      "level": 2,
+      "title": "1. Linear Regression Formulation",
+      "id": "1-linear-regression-formulation"
+    },
+    {
+      "level": 3,
+      "title": "The Cost Function (Mean Squared Error - MSE)",
+      "id": "the-cost-function-mean-squared-error-mse"
+    },
+    {
+      "level": 3,
+      "title": "Analytical Solution: The Normal Equation",
+      "id": "analytical-solution-the-normal-equation"
+    },
+    {
+      "level": 3,
+      "title": "Iterative Solution: Batch Gradient Descent",
+      "id": "iterative-solution-batch-gradient-descent"
+    },
+    {
+      "level": 2,
+      "title": "2. Python Implementation from Scratch",
+      "id": "2-python-implementation-from-scratch"
+    },
+    {
+      "level": 1,
+      "title": "1. Forward prediction",
+      "id": "1-forward-prediction"
+    },
+    {
+      "level": 1,
+      "title": "2. Compute MSE Loss",
+      "id": "2-compute-mse-loss"
+    },
+    {
+      "level": 1,
+      "title": "3. Compute Gradients",
+      "id": "3-compute-gradients"
+    },
+    {
+      "level": 1,
+      "title": "4. Parameter Update",
+      "id": "4-parameter-update"
+    },
+    {
+      "level": 2,
+      "title": "3. Logistic Regression Formulation",
+      "id": "3-logistic-regression-formulation"
+    },
+    {
+      "level": 3,
+      "title": "Binary Cross-Entropy (Log-Loss)",
+      "id": "binary-cross-entropy-log-loss"
+    },
+    {
+      "level": 2,
+      "title": "4. Regularization: Ridge ($L2$) vs. Lasso ($L1$)",
+      "id": "4-regularization-ridge-l2-vs-lasso-l1"
+    },
+    {
+      "level": 2,
+      "title": "5. Original Repository Lab Reference",
+      "id": "5-original-repository-lab-reference"
+    }
+  ],
+  "searchTokens": "Supervised Learning: Linear & Logistic Regression from Scratch Derive and implement Linear and Logistic Regression from first principles: Ordinary Least Squares, cross-entropy loss, gradient descent mathematics, and regularization. supervised linear-regression logistic-regression gradient-descent from-scratch \n\n# Supervised Learning: Linear & Logistic Regression\n\nSupervised learning maps an input feature vector $\\mathbf{x} \\in \\mathbb{R}^d$ to a target output $y$. When $y \\in \\mathbb{R}$, the problem is **Regression**; when $y$ is discrete, the problem is **Classification**.\n\n---\n\n## 1. Linear Regression Formulation\n\nLinear regression models the relationship between features $\\mathbf{X}$ and continuous target $y$ as a linear combination:\n\n$$\\hat{y} = h_\\theta(\\mathbf{x}) = \\theta_0 + \\theta_1 x_1 + \\theta_2 x_2 + \\dots + \\theta_d x_d = \\mathbf{x}^T \\mathbf{\\theta}$$\n\n### The Cost Function (Mean Squared Error - MSE)\n$$J(\\mathbf{\\theta}) = \\frac{1}{2m} \\sum_{i=1}^m \\left( h_\\theta(\\mathbf{x}^{(i)}) - y^{(i)} \\right)^2 = \\frac{1}{2m} \\|\\mathbf{X}\\mathbf{\\theta} - \\mathbf{y}\\|_2^2$$\n\n### Analytical Solution: The Normal Equation\nSetting $\\nabla_{\\mathbf{\\theta}} J(\\mathbf{\\theta}) = 0$ yields:\n\n$$\\mathbf{\\theta}^* = (\\mathbf{X}^T \\mathbf{X})^{-1} \\mathbf{X}^T \\mathbf{y}$$\n\n- Complexity is $\\mathcal{O}(d^3)$ due to matrix inversion.\n- For large feature sets ($d > 10,000$), iterative gradient descent is preferred over the Normal Equation.\n\n### Iterative Solution: Batch Gradient Descent\n$$\\theta_j := \\theta_j - \\alpha \\frac{\\partial J}{\\partial \\theta_j} = \\theta_j - \\frac{\\alpha}{m} \\sum_{i=1}^m \\left( h_\\theta(\\mathbf{x}^{(i)}) - y^{(i)} \\right) x_j^{(i)}$$\n\nIn vectorized form:\n$$\\mathbf{\\theta} := \\mathbf{\\theta} - \\frac{\\alpha}{m} \\mathbf{X}^T (\\mathbf{X}\\mathbf{\\theta} - \\mathbf{y})$",
+  "hasNotebook": false,
+  "sizeBytes": 4857,
+  "content": "\n\n# Supervised Learning: Linear & Logistic Regression\n\nSupervised learning maps an input feature vector $\\mathbf{x} \\in \\mathbb{R}^d$ to a target output $y$. When $y \\in \\mathbb{R}$, the problem is **Regression**; when $y$ is discrete, the problem is **Classification**.\n\n---\n\n## 1. Linear Regression Formulation\n\nLinear regression models the relationship between features $\\mathbf{X}$ and continuous target $y$ as a linear combination:\n\n$$\\hat{y} = h_\\theta(\\mathbf{x}) = \\theta_0 + \\theta_1 x_1 + \\theta_2 x_2 + \\dots + \\theta_d x_d = \\mathbf{x}^T \\mathbf{\\theta}$$\n\n### The Cost Function (Mean Squared Error - MSE)\n$$J(\\mathbf{\\theta}) = \\frac{1}{2m} \\sum_{i=1}^m \\left( h_\\theta(\\mathbf{x}^{(i)}) - y^{(i)} \\right)^2 = \\frac{1}{2m} \\|\\mathbf{X}\\mathbf{\\theta} - \\mathbf{y}\\|_2^2$$\n\n### Analytical Solution: The Normal Equation\nSetting $\\nabla_{\\mathbf{\\theta}} J(\\mathbf{\\theta}) = 0$ yields:\n\n$$\\mathbf{\\theta}^* = (\\mathbf{X}^T \\mathbf{X})^{-1} \\mathbf{X}^T \\mathbf{y}$$\n\n- Complexity is $\\mathcal{O}(d^3)$ due to matrix inversion.\n- For large feature sets ($d > 10,000$), iterative gradient descent is preferred over the Normal Equation.\n\n### Iterative Solution: Batch Gradient Descent\n$$\\theta_j := \\theta_j - \\alpha \\frac{\\partial J}{\\partial \\theta_j} = \\theta_j - \\frac{\\alpha}{m} \\sum_{i=1}^m \\left( h_\\theta(\\mathbf{x}^{(i)}) - y^{(i)} \\right) x_j^{(i)}$$\n\nIn vectorized form:\n$$\\mathbf{\\theta} := \\mathbf{\\theta} - \\frac{\\alpha}{m} \\mathbf{X}^T (\\mathbf{X}\\mathbf{\\theta} - \\mathbf{y})$$\n\n---\n\n## 2. Python Implementation from Scratch\n\n```python\nimport numpy as np\n\nclass LinearRegressionScratch:\n    def __init__(self, lr=0.01, n_iterations=1000):\n        self.lr = lr\n        self.n_iterations = n_iterations\n        self.weights = None\n        self.bias = None\n        self.loss_history = []\n\n    def fit(self, X, y):\n        n_samples, n_features = X.shape\n        self.weights = np.zeros(n_features)\n        self.bias = 0.0\n\n        for _ in range(self.n_iterations):\n            # 1. Forward prediction\n            y_pred = np.dot(X, self.weights) + self.bias\n            \n            # 2. Compute MSE Loss\n            loss = (1 / (2 * n_samples)) * np.sum((y_pred - y) ** 2)\n            self.loss_history.append(loss)\n\n            # 3. Compute Gradients\n            dw = (1 / n_samples) * np.dot(X.T, (y_pred - y))\n            db = (1 / n_samples) * np.sum(y_pred - y)\n\n            # 4. Parameter Update\n            self.weights -= self.lr * dw\n            self.bias -= self.lr * db\n\n    def predict(self, X):\n        return np.dot(X, self.weights) + self.bias\n```\n\n---\n\n## 3. Logistic Regression Formulation\n\nLogistic Regression models the probability that an observation belongs to class $y=1$ using the **Sigmoid (logistic) function** $\\sigma(z)$:\n\n$$\\sigma(z) = \\frac{1}{1 + e^{-z}}$$\n\n$$\\hat{y} = P(y = 1 \\mid \\mathbf{x}) = \\sigma(\\mathbf{x}^T \\mathbf{\\theta}) = \\frac{1}{1 + e^{-\\mathbf{x}^T \\mathbf{\\theta}}}$$\n\n### Binary Cross-Entropy (Log-Loss)\n$$J(\\mathbf{\\theta}) = -\\frac{1}{m} \\sum_{i=1}^m \\left[ y^{(i)} \\log(\\hat{y}^{(i)}) + (1 - y^{(i)}) \\log(1 - \\hat{y}^{(i)}) \\right]$$\n\nRemarkably, the gradient update rule for Logistic Regression has the exact same mathematical form as Linear Regression:\n$$\\mathbf{\\theta} := \\mathbf{\\theta} - \\frac{\\alpha}{m} \\mathbf{X}^T (\\sigma(\\mathbf{X}\\mathbf{\\theta}) - \\mathbf{y})$$\n\n---\n\n## 4. Regularization: Ridge ($L_2$) vs. Lasso ($L_1$)\n\nTo prevent overfitting, we add a penalty term to the cost function:\n\n$$\\text{Ridge } (L_2): \\quad J_{\\text{Ridge}}(\\mathbf{\\theta}) = J(\\mathbf{\\theta}) + \\frac{\\lambda}{2m} \\|\\mathbf{\\theta}\\|_2^2 = J(\\mathbf{\\theta}) + \\frac{\\lambda}{2m} \\sum_{j=1}^d \\theta_j^2$$\n\n$$\\text{Lasso } (L_1): \\quad J_{\\text{Lasso}}(\\mathbf{\\theta}) = J(\\mathbf{\\theta}) + \\frac{\\lambda}{m} \\|\\mathbf{\\theta}\\|_1 = J(\\mathbf{\\theta}) + \\frac{\\lambda}{m} \\sum_{j=1}^d |\\theta_j|$$\n\n- **Ridge**: Shrinks coefficients towards zero, handles multicollinearity, but keeps all features.\n- **Lasso**: Drives non-informative coefficients strictly to zero, performing automatic **feature selection**.\n\n---\n\n## 5. Original Repository Lab Reference\nSee our interactive gradient descent notebook and animation:\n- **Notebook**: `supervised ml/housepriceusingLR.ipynb`\n- **Visual Animation**: `supervised ml/linear_regression_A.gif`\n- **Handwritten Notes**: `Logistic Regression Notes 📝 .pdf`\n",
+  "frontmatter": {
+    "title": "Supervised Learning: Linear & Logistic Regression from Scratch",
+    "subject": "06-Supervised-Learning",
+    "difficulty": "Intermediate",
+    "tags": [
+      "supervised",
+      "linear-regression",
+      "logistic-regression",
+      "gradient-descent",
+      "from-scratch"
+    ],
+    "prerequisites": [
+      "01-Mathematics",
+      "04-Data-Preprocessing"
+    ],
+    "description": "Derive and implement Linear and Logistic Regression from first principles: Ordinary Least Squares, cross-entropy loss, gradient descent mathematics, and regularization."
+  }
+}

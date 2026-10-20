@@ -1,0 +1,106 @@
+{
+  "id": "19-gate-da-revision-01-gate-da-formula-cheat-sheet",
+  "title": "GATE Data Science & AI (DA): Complete High-Yield Revision Sheet",
+  "subjectId": "19-GATE-DA-Revision",
+  "format": "markdown",
+  "fileName": "01-gate-da-formula-cheat-sheet.md",
+  "relativePath": "content/19-GATE-DA-Revision/01-gate-da-formula-cheat-sheet.md",
+  "difficulty": "Advanced",
+  "tags": [
+    "gate-da",
+    "revision",
+    "formulas",
+    "linear-algebra",
+    "probability",
+    "algorithms",
+    "exam-prep"
+  ],
+  "prerequisites": [
+    "01-Mathematics",
+    "02-Statistics-and-Probability",
+    "06-Supervised-Learning"
+  ],
+  "description": "High-yield revision formula sheet for the GATE Data Science & AI syllabus: Linear Algebra, Calculus, Probability & Statistics, Machine Learning, and AI Search.",
+  "estimatedMinutes": 3,
+  "headings": [
+    {
+      "level": 1,
+      "title": "GATE Data Science & AI (DA) Revision Sheet",
+      "id": "gate-data-science-ai-da-revision-sheet"
+    },
+    {
+      "level": 2,
+      "title": "1. Linear Algebra Formulas",
+      "id": "1-linear-algebra-formulas"
+    },
+    {
+      "level": 3,
+      "title": "Determinant Properties",
+      "id": "determinant-properties"
+    },
+    {
+      "level": 3,
+      "title": "Orthogonal Matrices",
+      "id": "orthogonal-matrices"
+    },
+    {
+      "level": 2,
+      "title": "2. Probability & Distributions",
+      "id": "2-probability-distributions"
+    },
+    {
+      "level": 3,
+      "title": "Expectation & Variance Rules",
+      "id": "expectation-variance-rules"
+    },
+    {
+      "level": 3,
+      "title": "Key Probability Distributions",
+      "id": "key-probability-distributions"
+    },
+    {
+      "level": 2,
+      "title": "3. Machine Learning Algorithms",
+      "id": "3-machine-learning-algorithms"
+    },
+    {
+      "level": 3,
+      "title": "Support Vector Machines (SVM)",
+      "id": "support-vector-machines-svm"
+    },
+    {
+      "level": 3,
+      "title": "Decision Tree Splitting Metrics",
+      "id": "decision-tree-splitting-metrics"
+    },
+    {
+      "level": 2,
+      "title": "4. Artificial Intelligence & Search Strategies",
+      "id": "4-artificial-intelligence-search-strategies"
+    }
+  ],
+  "searchTokens": "GATE Data Science & AI (DA): Complete High-Yield Revision Sheet High-yield revision formula sheet for the GATE Data Science & AI syllabus: Linear Algebra, Calculus, Probability & Statistics, Machine Learning, and AI Search. gate-da revision formulas linear-algebra probability algorithms exam-prep \n\n# GATE Data Science & AI (DA) Revision Sheet\n\nA consolidated, high-yield revision reference covering the core mathematical and algorithmic concepts tested in the GATE DA curriculum.\n\n---\n\n## 1. Linear Algebra Formulas\n\n### Determinant Properties\n- $\\det(\\mathbf{A}\\mathbf{B}) = \\det(\\mathbf{A})\\det(\\mathbf{B})$\n- $\\det(k\\mathbf{A}_{n \\times n}) = k^n \\det(\\mathbf{A})$\n- $\\det(\\mathbf{A}^T) = \\det(\\mathbf{A})$\n- $\\det(\\mathbf{A}^{-1}) = \\frac{1}{\\det(\\mathbf{A})}$\n- $\\det(\\mathbf{A}) = \\prod_{i=1}^n \\lambda_i$ (Product of eigenvalues)\n- $\\text{Trace}(\\mathbf{A}) = \\sum_{i=1}^n A_{ii} = \\sum_{i=1}^n \\lambda_i$ (Sum of eigenvalues)\n\n### Orthogonal Matrices\n$$\\mathbf{Q}^T \\mathbf{Q} = \\mathbf{Q} \\mathbf{Q}^T = \\mathbf{I} \\implies \\mathbf{Q}^{-1} = \\mathbf{Q}^T, \\quad \\det(\\mathbf{Q}) = \\pm 1$$\nOrthogonal transformations preserve vector lengths ($\\|\\mathbf{Q}\\mathbf{x}\\|_2 = \\|\\mathbf{x}\\|_2$) and angles.\n\n---\n\n## 2. Probability & Distributions\n\n### Expectation & Variance Rules\n- $\\mathbb{E}[aX + bY] = a\\mathbb{E}[X] + b\\mathbb{E}[Y]$ (Always linear, even if dependent)\n- $\\text{Var}(aX + b) = a^2 \\text{Var}(X)$\n- $\\text{Var}(X + Y) = \\text{Var}(X) + \\text{Var}(Y) + 2\\text{Cov}(X, Y)$ (If independent, $\\text{Cov}(X, Y) = 0$)\n- $\\text{Cov}(X, Y) = \\mathbb{E}[XY] - \\mathbb{E}[X]\\mathbb{E}[Y]$\n\n### Key Probability Distributions\n| Distribution | Mean $\\mathbb{E}[X]$ | Variance $\\text{Var}(X)$ | Characteristic |\n| :--- | :--- | :--- | :--- |\n| **Bernoulli($p$)** | $p$ | $p(1-p)$ | Sing",
+  "hasNotebook": false,
+  "sizeBytes": 4121,
+  "content": "\n\n# GATE Data Science & AI (DA) Revision Sheet\n\nA consolidated, high-yield revision reference covering the core mathematical and algorithmic concepts tested in the GATE DA curriculum.\n\n---\n\n## 1. Linear Algebra Formulas\n\n### Determinant Properties\n- $\\det(\\mathbf{A}\\mathbf{B}) = \\det(\\mathbf{A})\\det(\\mathbf{B})$\n- $\\det(k\\mathbf{A}_{n \\times n}) = k^n \\det(\\mathbf{A})$\n- $\\det(\\mathbf{A}^T) = \\det(\\mathbf{A})$\n- $\\det(\\mathbf{A}^{-1}) = \\frac{1}{\\det(\\mathbf{A})}$\n- $\\det(\\mathbf{A}) = \\prod_{i=1}^n \\lambda_i$ (Product of eigenvalues)\n- $\\text{Trace}(\\mathbf{A}) = \\sum_{i=1}^n A_{ii} = \\sum_{i=1}^n \\lambda_i$ (Sum of eigenvalues)\n\n### Orthogonal Matrices\n$$\\mathbf{Q}^T \\mathbf{Q} = \\mathbf{Q} \\mathbf{Q}^T = \\mathbf{I} \\implies \\mathbf{Q}^{-1} = \\mathbf{Q}^T, \\quad \\det(\\mathbf{Q}) = \\pm 1$$\nOrthogonal transformations preserve vector lengths ($\\|\\mathbf{Q}\\mathbf{x}\\|_2 = \\|\\mathbf{x}\\|_2$) and angles.\n\n---\n\n## 2. Probability & Distributions\n\n### Expectation & Variance Rules\n- $\\mathbb{E}[aX + bY] = a\\mathbb{E}[X] + b\\mathbb{E}[Y]$ (Always linear, even if dependent)\n- $\\text{Var}(aX + b) = a^2 \\text{Var}(X)$\n- $\\text{Var}(X + Y) = \\text{Var}(X) + \\text{Var}(Y) + 2\\text{Cov}(X, Y)$ (If independent, $\\text{Cov}(X, Y) = 0$)\n- $\\text{Cov}(X, Y) = \\mathbb{E}[XY] - \\mathbb{E}[X]\\mathbb{E}[Y]$\n\n### Key Probability Distributions\n| Distribution | Mean $\\mathbb{E}[X]$ | Variance $\\text{Var}(X)$ | Characteristic |\n| :--- | :--- | :--- | :--- |\n| **Bernoulli($p$)** | $p$ | $p(1-p)$ | Single trial, binary |\n| **Binomial($n, p$)** | $np$ | $np(1-p)$ | $n$ independent trials |\n| **Poisson($\\lambda$)** | $\\lambda$ | $\\lambda$ | Mean equals variance |\n| **Uniform($a, b$)** | $\\frac{a+b}{2}$ | $\\frac{(b-a)^2}{12}$ | Constant density |\n| **Exponential($\\lambda$)** | $\\frac{1}{\\lambda}$ | $\\frac{1}{\\lambda^2}$ | Memoryless property: $P(X > s+t \\mid X > s) = P(X > t)$ |\n\n---\n\n## 3. Machine Learning Algorithms\n\n### Support Vector Machines (SVM)\nPrimal optimization problem with soft margin:\n$$\\min_{\\mathbf{w}, b, \\mathbf{\\xi}} \\frac{1}{2} \\|\\mathbf{w}\\|^2 + C \\sum_{i=1}^m \\xi_i \\quad \\text{s.t.} \\quad y^{(i)}(\\mathbf{w}^T \\mathbf{x}^{(i)} + b) \\ge 1 - \\xi_i, \\quad \\xi_i \\ge 0$$\n- Margin width: $\\frac{2}{\\|\\mathbf{w}\\|}$\n- Kernel trick: $K(\\mathbf{x}, \\mathbf{z}) = \\phi(\\mathbf{x})^T \\phi(\\mathbf{z})$\n- Radial Basis Function (RBF) Kernel: $K(\\mathbf{x}, \\mathbf{z}) = \\exp(-\\gamma \\|\\mathbf{x} - \\mathbf{z}\\|^2)$\n\n### Decision Tree Splitting Metrics\n- **Entropy**: $H(S) = -\\sum_{i=1}^C p_i \\log_2(p_i)$\n- **Information Gain**: $\\text{IG}(S, A) = H(S) - \\sum_{v \\in \\text{Values}(A)} \\frac{|S_v|}{|S|} H(S_v)$\n- **Gini Impurity**: $G(S) = 1 - \\sum_{i=1}^C p_i^2$\n\n---\n\n## 4. Artificial Intelligence & Search Strategies\n\n| Search Algorithm | Complete? | Optimal? | Time Complexity | Space Complexity |\n| :--- | :--- | :--- | :--- | :--- |\n| **Breadth-First Search (BFS)** | Yes | Yes (if step costs equal) | $\\mathcal{O}(b^d)$ | $\\mathcal{O}(b^d)$ |\n| **Depth-First Search (DFS)** | No (in infinite spaces) | No | $\\mathcal{O}(b^m)$ | $\\mathcal{O}(bm)$ |\n| **Uniform-Cost Search (Dijkstra)** | Yes (if step cost $\\ge \\epsilon > 0$) | Yes | $\\mathcal{O}(b^{1 + \\lfloor C^* / \\epsilon \\rfloor})$ | $\\mathcal{O}(b^{1 + \\lfloor C^* / \\epsilon \\rfloor})$ |\n| **A\\* Search** | Yes | Yes (if $h(n)$ is admissible) | $\\mathcal{O}(b^d)$ | $\\mathcal{O}(b^d)$ |\n\n> [!TIP]\n> **Admissibility**: A heuristic $h(n)$ is admissible if it never overestimates the true cost to reach the goal ($0 \\le h(n) \\le h^*(n)$).\n> **Consistency (Monotonicity)**: $h(n) \\le c(n, a, n') + h(n')$. Consistency implies admissibility.\n",
+  "frontmatter": {
+    "title": "GATE Data Science & AI (DA): Complete High-Yield Revision Sheet",
+    "subject": "19-GATE-DA-Revision",
+    "difficulty": "Advanced",
+    "tags": [
+      "gate-da",
+      "revision",
+      "formulas",
+      "linear-algebra",
+      "probability",
+      "algorithms",
+      "exam-prep"
+    ],
+    "prerequisites": [
+      "01-Mathematics",
+      "02-Statistics-and-Probability",
+      "06-Supervised-Learning"
+    ],
+    "description": "High-yield revision formula sheet for the GATE Data Science & AI syllabus: Linear Algebra, Calculus, Probability & Statistics, Machine Learning, and AI Search."
+  }
+}

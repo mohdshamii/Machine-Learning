@@ -1,0 +1,93 @@
+{
+  "id": "08-feature-engineering-01-feature-scaling-selection",
+  "title": "Feature Engineering & Scaling: Normalization, Standardization & Selection",
+  "subjectId": "08-Feature-Engineering",
+  "format": "markdown",
+  "fileName": "01-feature-scaling-selection.md",
+  "relativePath": "content/08-Feature-Engineering/01-feature-scaling-selection.md",
+  "difficulty": "Beginner",
+  "tags": [
+    "feature-engineering",
+    "scaling",
+    "standardization",
+    "normalization",
+    "robust-scaler"
+  ],
+  "prerequisites": [
+    "04-Data-Preprocessing"
+  ],
+  "description": "Master feature transformation and scaling techniques: StandardScaler, MinMaxScaler, RobustScaler, power transforms, and mutual information feature selection.",
+  "estimatedMinutes": 2,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Feature Engineering & Scaling",
+      "id": "feature-engineering-scaling"
+    },
+    {
+      "level": 2,
+      "title": "1. Feature Scaling Comparison",
+      "id": "1-feature-scaling-comparison"
+    },
+    {
+      "level": 3,
+      "title": "1. Standardization (Z-Score Scaling)",
+      "id": "1-standardization-z-score-scaling"
+    },
+    {
+      "level": 3,
+      "title": "2. Min-Max Normalization",
+      "id": "2-min-max-normalization"
+    },
+    {
+      "level": 3,
+      "title": "3. Robust Scaling",
+      "id": "3-robust-scaling"
+    },
+    {
+      "level": 2,
+      "title": "2. Python Code Demonstration",
+      "id": "2-python-code-demonstration"
+    },
+    {
+      "level": 1,
+      "title": "Sample dataset",
+      "id": "sample-dataset"
+    },
+    {
+      "level": 2,
+      "title": "3. Mathematical Comparison Table",
+      "id": "3-mathematical-comparison-table"
+    },
+    {
+      "level": 2,
+      "title": "4. Tree-Based Models Exception",
+      "id": "4-tree-based-models-exception"
+    },
+    {
+      "level": 2,
+      "title": "5. Original Repository Lab Reference",
+      "id": "5-original-repository-lab-reference"
+    }
+  ],
+  "searchTokens": "Feature Engineering & Scaling: Normalization, Standardization & Selection Master feature transformation and scaling techniques: StandardScaler, MinMaxScaler, RobustScaler, power transforms, and mutual information feature selection. feature-engineering scaling standardization normalization robust-scaler \n\n# Feature Engineering & Scaling\n\nAlgorithms that rely on distance metrics (KNN, K-Means, SVM) or gradient descent optimization (Linear/Logistic Regression, Neural Networks) are severely affected by feature magnitudes. A feature ranging from $10,000$ to $100,000$ will dominate a feature ranging from $0$ to $1$, warping Euclidean distances and creating elongated error surfaces.\n\n---\n\n## 1. Feature Scaling Comparison\n\n### 1. Standardization (Z-Score Scaling)\nCenters the distribution at mean $0$ with standard deviation $1$:\n\n$$z = \\frac{x - \\mu}{\\sigma}$$\n\n- **When to use**: Optimal for algorithms assuming Gaussian distributions, gradient descent, SVMs, and PCA.\n- **Drawback**: Preserves outlier leverage since outliers still have high Z-scores ($|z| > 3$).\n\n### 2. Min-Max Normalization\nBonds features into a fixed bounded interval $[0, 1]$ (or $[a, b]$):\n\n$$x' = \\frac{x - x_{\\min}}{x_{\\max} - x_{\\min}}$$\n\n- **When to use**: Neural networks (image pixel intensities $[0, 255] \\to [0, 1]$), algorithms requiring non-negative inputs (e.g. Multinomial Naive Bayes).\n- **Drawback**: Extremely sensitive to extreme outliers; if an outlier is present, the remaining $99\\%$ of values are compressed into a narrow fraction $[0, 0.05]$.\n\n### 3. Robust Scaling\nUses median and Interquartile Range (IQR) to scale data:\n\n$$x' = \\frac{x - Q_2}{Q_3 - Q_1}$$\n\n- **When to use**: High-outlier datasets where outliers represent genuine signals rather than measurement errors.\n\n---\n\n## 2. Python Code Demonst",
+  "hasNotebook": false,
+  "sizeBytes": 3684,
+  "content": "\n\n# Feature Engineering & Scaling\n\nAlgorithms that rely on distance metrics (KNN, K-Means, SVM) or gradient descent optimization (Linear/Logistic Regression, Neural Networks) are severely affected by feature magnitudes. A feature ranging from $10,000$ to $100,000$ will dominate a feature ranging from $0$ to $1$, warping Euclidean distances and creating elongated error surfaces.\n\n---\n\n## 1. Feature Scaling Comparison\n\n### 1. Standardization (Z-Score Scaling)\nCenters the distribution at mean $0$ with standard deviation $1$:\n\n$$z = \\frac{x - \\mu}{\\sigma}$$\n\n- **When to use**: Optimal for algorithms assuming Gaussian distributions, gradient descent, SVMs, and PCA.\n- **Drawback**: Preserves outlier leverage since outliers still have high Z-scores ($|z| > 3$).\n\n### 2. Min-Max Normalization\nBonds features into a fixed bounded interval $[0, 1]$ (or $[a, b]$):\n\n$$x' = \\frac{x - x_{\\min}}{x_{\\max} - x_{\\min}}$$\n\n- **When to use**: Neural networks (image pixel intensities $[0, 255] \\to [0, 1]$), algorithms requiring non-negative inputs (e.g. Multinomial Naive Bayes).\n- **Drawback**: Extremely sensitive to extreme outliers; if an outlier is present, the remaining $99\\%$ of values are compressed into a narrow fraction $[0, 0.05]$.\n\n### 3. Robust Scaling\nUses median and Interquartile Range (IQR) to scale data:\n\n$$x' = \\frac{x - Q_2}{Q_3 - Q_1}$$\n\n- **When to use**: High-outlier datasets where outliers represent genuine signals rather than measurement errors.\n\n---\n\n## 2. Python Code Demonstration\n\n```python\nimport numpy as np\nimport pandas as pd\nfrom sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler\n\n# Sample dataset\ndata = np.array([\n    [10.0, 150000.0],\n    [12.0, 180000.0],\n    [9.0,  120000.0],\n    [11.0, 160000.0],\n    [50.0, 5000000.0] # Extreme outlier\n])\n\nstd_scaler = StandardScaler()\nminmax_scaler = MinMaxScaler()\nrobust_scaler = RobustScaler()\n\nprint(\"Original Data:\\n\", data)\nprint(\"\\nStandardized (Z-Score):\\n\", std_scaler.fit_transform(data).round(2))\nprint(\"\\nMin-Max Scaled [0, 1]:\\n\", minmax_scaler.fit_transform(data).round(2))\nprint(\"\\nRobust Scaled (Median & IQR):\\n\", robust_scaler.fit_transform(data).round(2))\n```\n\n---\n\n## 3. Mathematical Comparison Table\n\n| Scaling Method | Formula | Center | Scale | Robust to Outliers? |\n| :--- | :--- | :--- | :--- | :--- |\n| **StandardScaler** | $\\frac{x - \\mu}{\\sigma}$ | $\\mu$ (Mean) | $\\sigma$ (Std Dev) | ❌ No |\n| **MinMaxScaler** | $\\frac{x - x_{\\min}}{x_{\\max} - x_{\\min}}$ | $x_{\\min}$ | Range $(x_{\\max} - x_{\\min})$ | ❌ No |\n| **RobustScaler** | $\\frac{x - \\text{Median}}{\\text{IQR}}$ | Median ($Q_2$) | IQR ($Q_3 - Q_1$) | ✅ Yes |\n| **MaxAbsScaler** | $\\frac{x}{\\max(|x|)}$ | $0$ | Max Absolute | ❌ No |\n\n---\n\n## 4. Tree-Based Models Exception\n> [!NOTE]\n> **Decision Trees, Random Forests, and Gradient Boosted Trees (XGBoost, LightGBM) are scale-invariant!**\n> They split nodes based on ordering (rank) rather than numerical distance. Scaling features neither helps nor hurts tree-based algorithms.\n\n---\n\n## 5. Original Repository Lab Reference\nExamine our original hands-on scaling notebook and dataset:\n- **Notebook**: `feature scaling/feature scaling.ipynb`\n- **Dataset**: `feature scaling/SampleFile.csv`\n",
+  "frontmatter": {
+    "title": "Feature Engineering & Scaling: Normalization, Standardization & Selection",
+    "subject": "08-Feature-Engineering",
+    "difficulty": "Beginner",
+    "tags": [
+      "feature-engineering",
+      "scaling",
+      "standardization",
+      "normalization",
+      "robust-scaler"
+    ],
+    "prerequisites": [
+      "04-Data-Preprocessing"
+    ],
+    "description": "Master feature transformation and scaling techniques: StandardScaler, MinMaxScaler, RobustScaler, power transforms, and mutual information feature selection."
+  }
+}

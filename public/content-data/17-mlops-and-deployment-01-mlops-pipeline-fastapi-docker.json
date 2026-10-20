@@ -1,0 +1,97 @@
+{
+  "id": "17-mlops-and-deployment-01-mlops-pipeline-fastapi-docker",
+  "title": "MLOps & Model Deployment: FastAPI, Docker & CI/CD Pipelines",
+  "subjectId": "17-MLOps-and-Deployment",
+  "format": "markdown",
+  "fileName": "01-mlops-pipeline-fastapi-docker.md",
+  "relativePath": "content/17-MLOps-and-Deployment/01-mlops-pipeline-fastapi-docker.md",
+  "difficulty": "Advanced",
+  "tags": [
+    "mlops",
+    "fastapi",
+    "docker",
+    "deployment",
+    "model-serving",
+    "monitoring",
+    "cicd"
+  ],
+  "prerequisites": [
+    "06-Supervised-Learning"
+  ],
+  "description": "Bridge the gap between model prototyping and production engineering: serialization (joblib, ONNX), high-performance REST APIs with FastAPI, Docker containerization, and data drift monitoring.",
+  "estimatedMinutes": 2,
+  "headings": [
+    {
+      "level": 1,
+      "title": "MLOps & Production Model Deployment",
+      "id": "mlops-production-model-deployment"
+    },
+    {
+      "level": 2,
+      "title": "1. Model Serialization: Joblib & ONNX",
+      "id": "1-model-serialization-joblib-onnx"
+    },
+    {
+      "level": 1,
+      "title": "Saving trained scikit-learn pipeline",
+      "id": "saving-trained-scikit-learn-pipeline"
+    },
+    {
+      "level": 1,
+      "title": "Loading model into inference service",
+      "id": "loading-model-into-inference-service"
+    },
+    {
+      "level": 3,
+      "title": "ONNX (Open Neural Network Exchange)",
+      "id": "onnx-open-neural-network-exchange"
+    },
+    {
+      "level": 2,
+      "title": "2. Serving Models with FastAPI & Pydantic",
+      "id": "2-serving-models-with-fastapi-pydantic"
+    },
+    {
+      "level": 2,
+      "title": "3. Production Dockerfile",
+      "id": "3-production-dockerfile"
+    },
+    {
+      "level": 1,
+      "title": "Multi-stage lightweight Python runtime",
+      "id": "multi-stage-lightweight-python-runtime"
+    },
+    {
+      "level": 1,
+      "title": "Install system dependencies",
+      "id": "install-system-dependencies"
+    },
+    {
+      "level": 2,
+      "title": "4. Production Drift Monitoring",
+      "id": "4-production-drift-monitoring"
+    }
+  ],
+  "searchTokens": "MLOps & Model Deployment: FastAPI, Docker & CI/CD Pipelines Bridge the gap between model prototyping and production engineering: serialization (joblib, ONNX), high-performance REST APIs with FastAPI, Docker containerization, and data drift monitoring. mlops fastapi docker deployment model-serving monitoring cicd \n\n# MLOps & Production Model Deployment\n\nA model running only in a Jupyter notebook provides zero business value. Production Machine Learning (MLOps) requires reliable inference latency, input schema validation, automated integration tests, containerization, and drift detection.\n\n---\n\n## 1. Model Serialization: Joblib & ONNX\n\n```python\nimport joblib\n\n# Saving trained scikit-learn pipeline\njoblib.dump(pipeline, \"model_artifacts/churn_model_v1.pkl\", compress=3)\n\n# Loading model into inference service\nloaded_model = joblib.load(\"model_artifacts/churn_model_v1.pkl\")\n```\n\n### ONNX (Open Neural Network Exchange)\nFor high-throughput, cross-language inference, export models to ONNX to run using hardware-accelerated runtimes (DirectML, TensorRT, ONNX Runtime).\n\n---\n\n## 2. Serving Models with FastAPI & Pydantic\n\nFastAPI provides asynchronous request handling, OpenAPI documentation out-of-the-box, and strict type validation via Pydantic.\n\n```python\nfrom fastapi import FastAPI, HTTPException\nfrom pydantic import BaseModel, Field\nimport joblib\nimport numpy as np\n\napp = FastAPI(title=\"ML Prediction Service\", version=\"1.0.0\")\nmodel = joblib.load(\"model_artifacts/churn_model_v1.pkl\")\n\nclass CustomerFeatures(BaseModel):\n    age: int = Field(..., ge=18, le=100, description=\"Customer age in years\")\n    tenure: int = Field(..., ge=0, description=\"Months subscribed\")\n    monthly_charges: float = Field(..., ge=0.0, description=\"Monthly invoice\")\n\nclass PredictionResponse(BaseModel):\n    churn_prob",
+  "hasNotebook": false,
+  "sizeBytes": 3658,
+  "content": "\n\n# MLOps & Production Model Deployment\n\nA model running only in a Jupyter notebook provides zero business value. Production Machine Learning (MLOps) requires reliable inference latency, input schema validation, automated integration tests, containerization, and drift detection.\n\n---\n\n## 1. Model Serialization: Joblib & ONNX\n\n```python\nimport joblib\n\n# Saving trained scikit-learn pipeline\njoblib.dump(pipeline, \"model_artifacts/churn_model_v1.pkl\", compress=3)\n\n# Loading model into inference service\nloaded_model = joblib.load(\"model_artifacts/churn_model_v1.pkl\")\n```\n\n### ONNX (Open Neural Network Exchange)\nFor high-throughput, cross-language inference, export models to ONNX to run using hardware-accelerated runtimes (DirectML, TensorRT, ONNX Runtime).\n\n---\n\n## 2. Serving Models with FastAPI & Pydantic\n\nFastAPI provides asynchronous request handling, OpenAPI documentation out-of-the-box, and strict type validation via Pydantic.\n\n```python\nfrom fastapi import FastAPI, HTTPException\nfrom pydantic import BaseModel, Field\nimport joblib\nimport numpy as np\n\napp = FastAPI(title=\"ML Prediction Service\", version=\"1.0.0\")\nmodel = joblib.load(\"model_artifacts/churn_model_v1.pkl\")\n\nclass CustomerFeatures(BaseModel):\n    age: int = Field(..., ge=18, le=100, description=\"Customer age in years\")\n    tenure: int = Field(..., ge=0, description=\"Months subscribed\")\n    monthly_charges: float = Field(..., ge=0.0, description=\"Monthly invoice\")\n\nclass PredictionResponse(BaseModel):\n    churn_probability: float\n    prediction: int\n\n@app.post(\"/predict\", response_model=PredictionResponse)\ndef predict_churn(customer: CustomerFeatures):\n    try:\n        features = np.array([[customer.age, customer.tenure, customer.monthly_charges]])\n        prob = float(model.predict_proba(features)[0][1])\n        pred = int(prob >= 0.5)\n        return PredictionResponse(churn_probability=round(prob, 4), prediction=pred)\n    except Exception as e:\n        raise HTTPException(status_code=500, detail=str(e))\n\n@app.get(\"/health\")\ndef health_check():\n    return {\"status\": \"healthy\"}\n```\n\n---\n\n## 3. Production Dockerfile\n\n```dockerfile\n# Multi-stage lightweight Python runtime\nFROM python:3.11-slim\n\nWORKDIR /app\n\nENV PYTHONUNBUFFERED=1 \\\n    PYTHONDONTWRITEBYTECODE=1\n\n# Install system dependencies\nRUN apt-get update && apt-get install -y --no-install-recommends \\\n    curl \\\n    && rm -rf /var/lib/apt/lists/*\n\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\n\nCOPY . .\n\nEXPOSE 8000\n\nHEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \\\n  CMD curl -f http://localhost:8000/health || exit 1\n\nCMD [\"uvicorn\", \"app:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\", \"--workers\", \"4\"]\n```\n\n---\n\n## 4. Production Drift Monitoring\n\n- **Data Drift (Covariate Shift)**: $P(\\mathbf{X})$ changes over time while $P(y \\mid \\mathbf{x})$ remains constant (e.g. population demographics shift).\n  - Detected using Kolmogorov-Smirnov (KS) test for numerical features or Population Stability Index (PSI).\n- **Concept Drift**: $P(y \\mid \\mathbf{x})$ changes while $P(\\mathbf{X})$ remains unchanged (e.g. consumer purchasing patterns mutate following an economic shock).\n",
+  "frontmatter": {
+    "title": "MLOps & Model Deployment: FastAPI, Docker & CI/CD Pipelines",
+    "subject": "17-MLOps-and-Deployment",
+    "difficulty": "Advanced",
+    "tags": [
+      "mlops",
+      "fastapi",
+      "docker",
+      "deployment",
+      "model-serving",
+      "monitoring",
+      "cicd"
+    ],
+    "prerequisites": [
+      "06-Supervised-Learning"
+    ],
+    "description": "Bridge the gap between model prototyping and production engineering: serialization (joblib, ONNX), high-performance REST APIs with FastAPI, Docker containerization, and data drift monitoring."
+  }
+}

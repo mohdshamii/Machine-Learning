@@ -1,0 +1,80 @@
+{
+  "id": "06-supervised-learning-02-decision-trees-and-splitting",
+  "title": "Decision Trees & Splitting Criteria: Gini vs Entropy",
+  "subjectId": "06-Supervised-Learning",
+  "format": "markdown",
+  "fileName": "02-decision-trees-and-splitting.md",
+  "relativePath": "content/06-Supervised-Learning/02-decision-trees-and-splitting.md",
+  "difficulty": "Beginner",
+  "tags": [
+    "decision-trees",
+    "cart",
+    "id3",
+    "gini-impurity",
+    "information-gain",
+    "pruning"
+  ],
+  "prerequisites": [
+    "06-Supervised-Learning"
+  ],
+  "description": "How Decision Trees partition feature spaces: CART algorithm, Gini Impurity, Shannon Entropy, Information Gain, and cost-complexity pruning.",
+  "estimatedMinutes": 1,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Decision Trees & Splitting Criteria",
+      "id": "decision-trees-splitting-criteria"
+    },
+    {
+      "level": 2,
+      "title": "1. Splitting Criteria for Classification",
+      "id": "1-splitting-criteria-for-classification"
+    },
+    {
+      "level": 3,
+      "title": "Gini Impurity (CART Default)",
+      "id": "gini-impurity-cart-default"
+    },
+    {
+      "level": 3,
+      "title": "Shannon Entropy & Information Gain (ID3 / C4.5)",
+      "id": "shannon-entropy-information-gain-id3-c4-5"
+    },
+    {
+      "level": 2,
+      "title": "2. Cost-Complexity Pruning (Post-Pruning)",
+      "id": "2-cost-complexity-pruning-post-pruning"
+    },
+    {
+      "level": 1,
+      "title": "Cost-complexity pruning path",
+      "id": "cost-complexity-pruning-path"
+    },
+    {
+      "level": 1,
+      "title": "Train optimal tree with chosen alpha",
+      "id": "train-optimal-tree-with-chosen-alpha"
+    }
+  ],
+  "searchTokens": "Decision Trees & Splitting Criteria: Gini vs Entropy How Decision Trees partition feature spaces: CART algorithm, Gini Impurity, Shannon Entropy, Information Gain, and cost-complexity pruning. decision-trees cart id3 gini-impurity information-gain pruning \n\n# Decision Trees & Splitting Criteria\n\nDecision Trees recursively partition feature space into axis-aligned rectangular regions, assigning the majority class (classification) or mean value (regression) to leaf nodes.\n\n---\n\n## 1. Splitting Criteria for Classification\n\n### Gini Impurity (CART Default)\nMeasures the probability of a randomly chosen element being incorrectly labeled if it were randomly labeled according to the class distribution in the node:\n\n$$G(S) = 1 - \\sum_{k=1}^K p_k^2$$\n\n- For a pure node ($p_1 = 1, p_{k \\ne 1} = 0$), $G = 1 - 1 = 0$.\n- For an evenly balanced binary node ($p_1 = 0.5, p_2 = 0.5$), $G = 1 - (0.25 + 0.25) = 0.5$.\n\n### Shannon Entropy & Information Gain (ID3 / C4.5)\nEntropy measures the average level of uncertainty or surprise in node $S$:\n\n$$H(S) = -\\sum_{k=1}^K p_k \\log_2(p_k)$$\n\nThe **Information Gain** from a candidate split on feature $A$ is:\n\n$$\\text{IG}(S, A) = H(S) - \\sum_{v \\in \\text{Values}(A)} \\frac{|S_v|}{|S|} H(S_v)$$\n\n---\n\n## 2. Cost-Complexity Pruning (Post-Pruning)\n\nUnconstrained decision trees grow until every leaf is pure, resulting in massive overfitting ($100\\%$ training accuracy, terrible test accuracy). Cost-complexity pruning minimizes:\n\n$$R_\\alpha(T) = R(T) + \\alpha |T|$$\n\nWhere:\n- $R(T)$ is the tree's empirical misclassification rate.\n- $|T|$ is the number of terminal leaf nodes.\n- $\\alpha \\ge 0$ is the complexity tuning parameter.\n\n```python\nfrom sklearn.tree import DecisionTreeClassifier\n\n# Cost-complexity pruning pa",
+  "hasNotebook": false,
+  "sizeBytes": 2196,
+  "content": "\n\n# Decision Trees & Splitting Criteria\n\nDecision Trees recursively partition feature space into axis-aligned rectangular regions, assigning the majority class (classification) or mean value (regression) to leaf nodes.\n\n---\n\n## 1. Splitting Criteria for Classification\n\n### Gini Impurity (CART Default)\nMeasures the probability of a randomly chosen element being incorrectly labeled if it were randomly labeled according to the class distribution in the node:\n\n$$G(S) = 1 - \\sum_{k=1}^K p_k^2$$\n\n- For a pure node ($p_1 = 1, p_{k \\ne 1} = 0$), $G = 1 - 1 = 0$.\n- For an evenly balanced binary node ($p_1 = 0.5, p_2 = 0.5$), $G = 1 - (0.25 + 0.25) = 0.5$.\n\n### Shannon Entropy & Information Gain (ID3 / C4.5)\nEntropy measures the average level of uncertainty or surprise in node $S$:\n\n$$H(S) = -\\sum_{k=1}^K p_k \\log_2(p_k)$$\n\nThe **Information Gain** from a candidate split on feature $A$ is:\n\n$$\\text{IG}(S, A) = H(S) - \\sum_{v \\in \\text{Values}(A)} \\frac{|S_v|}{|S|} H(S_v)$$\n\n---\n\n## 2. Cost-Complexity Pruning (Post-Pruning)\n\nUnconstrained decision trees grow until every leaf is pure, resulting in massive overfitting ($100\\%$ training accuracy, terrible test accuracy). Cost-complexity pruning minimizes:\n\n$$R_\\alpha(T) = R(T) + \\alpha |T|$$\n\nWhere:\n- $R(T)$ is the tree's empirical misclassification rate.\n- $|T|$ is the number of terminal leaf nodes.\n- $\\alpha \\ge 0$ is the complexity tuning parameter.\n\n```python\nfrom sklearn.tree import DecisionTreeClassifier\n\n# Cost-complexity pruning path\nclf = DecisionTreeClassifier(random_state=42)\npath = clf.cost_complexity_pruning_path(X_train, y_train)\nccp_alphas = path.ccp_alphas\n\n# Train optimal tree with chosen alpha\npruned_tree = DecisionTreeClassifier(random_state=42, ccp_alpha=0.015)\npruned_tree.fit(X_train, y_train)\n```\n",
+  "frontmatter": {
+    "title": "Decision Trees & Splitting Criteria: Gini vs Entropy",
+    "subject": "06-Supervised-Learning",
+    "difficulty": "Beginner",
+    "tags": [
+      "decision-trees",
+      "cart",
+      "id3",
+      "gini-impurity",
+      "information-gain",
+      "pruning"
+    ],
+    "prerequisites": [
+      "06-Supervised-Learning"
+    ],
+    "description": "How Decision Trees partition feature spaces: CART algorithm, Gini Impurity, Shannon Entropy, Information Gain, and cost-complexity pruning."
+  }
+}

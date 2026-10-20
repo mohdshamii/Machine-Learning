@@ -1,0 +1,89 @@
+{
+  "id": "20-interview-preparation-01-top-50-ml-interview-questions",
+  "title": "Top Machine Learning Interview Questions & Flashcards",
+  "subjectId": "20-Interview-Preparation",
+  "format": "markdown",
+  "fileName": "01-top-50-ml-interview-questions.md",
+  "relativePath": "content/20-Interview-Preparation/01-top-50-ml-interview-questions.md",
+  "difficulty": "Advanced",
+  "tags": [
+    "interview",
+    "questions",
+    "flashcards",
+    "faang",
+    "cheat-sheet",
+    "system-design"
+  ],
+  "prerequisites": [
+    "06-Supervised-Learning",
+    "09-Model-Evaluation",
+    "11-Deep-Learning"
+  ],
+  "description": "High-frequency machine learning interview questions asked at top tech companies, covering algorithmic trade-offs, mathematical derivations, and practical debugging scenarios.",
+  "estimatedMinutes": 3,
+  "headings": [
+    {
+      "level": 1,
+      "title": "Top Machine Learning Interview Questions",
+      "id": "top-machine-learning-interview-questions"
+    },
+    {
+      "level": 2,
+      "title": "1. Core Algorithms & Mathematics",
+      "id": "1-core-algorithms-mathematics"
+    },
+    {
+      "level": 3,
+      "title": "Q1: Why does Lasso ($L1$) create sparse weights, while Ridge ($L2$) does not?",
+      "id": "q1-why-does-lasso-l1-create-sparse-weights-while-ridge-l2-does-not"
+    },
+    {
+      "level": 3,
+      "title": "Q2: What is the Vanishing Gradient problem, and what are 4 distinct ways to solve it?",
+      "id": "q2-what-is-the-vanishing-gradient-problem-and-what-are-4-distinct-ways-to-solve-it"
+    },
+    {
+      "level": 3,
+      "title": "Q3: How do you choose between Precision and Recall for a real-world system?",
+      "id": "q3-how-do-you-choose-between-precision-and-recall-for-a-real-world-system"
+    },
+    {
+      "level": 3,
+      "title": "Q4: Why does XGBoost perform better than standard Gradient Boosting?",
+      "id": "q4-why-does-xgboost-perform-better-than-standard-gradient-boosting"
+    },
+    {
+      "level": 3,
+      "title": "Q5: How do you handle severe class imbalance (1:1000)?",
+      "id": "q5-how-do-you-handle-severe-class-imbalance-1-1000"
+    },
+    {
+      "level": 2,
+      "title": "2. Additional Reference Notes",
+      "id": "2-additional-reference-notes"
+    }
+  ],
+  "searchTokens": "Top Machine Learning Interview Questions & Flashcards High-frequency machine learning interview questions asked at top tech companies, covering algorithmic trade-offs, mathematical derivations, and practical debugging scenarios. interview questions flashcards faang cheat-sheet system-design \n\n# Top Machine Learning Interview Questions\n\nA curated master checklist of high-probability technical interview questions with mathematical derivations, code snippets, and counter-intuitive edge cases.\n\n---\n\n## 1. Core Algorithms & Mathematics\n\n### Q1: Why does Lasso ($L_1$) create sparse weights, while Ridge ($L_2$) does not?\n<details>\n<summary>Click to reveal answer</summary>\n\n**Mathematical & Geometric Explanation:**\nThe constrained optimization formulations are:\n- Lasso: $\\min J(\\theta) \\quad \\text{s.t.} \\quad \\sum |\\theta_i| \\le C$ (Diamond-shaped constraint region in 2D with sharp corners on the coordinate axes).\n- Ridge: $\\min J(\\theta) \\quad \\text{s.t.} \\quad \\sum \\theta_i^2 \\le C$ (Circular/spherical constraint region).\n\nElliptical contours of the unconstrained MSE loss expand outward from the OLS solution. For Lasso, the expanding loss contours are statistically far more likely to intersect the constraint boundary at one of the sharp diamond vertices (where $\\theta_j = 0$). For Ridge, intersections occur anywhere along the smooth spherical surface, shrinking coefficients toward zero without making them exactly zero.\n</details>\n\n---\n\n### Q2: What is the Vanishing Gradient problem, and what are 4 distinct ways to solve it?\n<details>\n<summary>Click to reveal answer</summary>\n\n**Problem:** By the chain rule, gradients backpropagating through $L$ layers multiply partial derivatives $\\prod_{l=1}^L \\frac{\\partial \\mathbf{a}^{(l)}}{\\partial \\mathbf{z}^{(l)}}$. If activatio",
+  "hasNotebook": false,
+  "sizeBytes": 5417,
+  "content": "\n\n# Top Machine Learning Interview Questions\n\nA curated master checklist of high-probability technical interview questions with mathematical derivations, code snippets, and counter-intuitive edge cases.\n\n---\n\n## 1. Core Algorithms & Mathematics\n\n### Q1: Why does Lasso ($L_1$) create sparse weights, while Ridge ($L_2$) does not?\n<details>\n<summary>Click to reveal answer</summary>\n\n**Mathematical & Geometric Explanation:**\nThe constrained optimization formulations are:\n- Lasso: $\\min J(\\theta) \\quad \\text{s.t.} \\quad \\sum |\\theta_i| \\le C$ (Diamond-shaped constraint region in 2D with sharp corners on the coordinate axes).\n- Ridge: $\\min J(\\theta) \\quad \\text{s.t.} \\quad \\sum \\theta_i^2 \\le C$ (Circular/spherical constraint region).\n\nElliptical contours of the unconstrained MSE loss expand outward from the OLS solution. For Lasso, the expanding loss contours are statistically far more likely to intersect the constraint boundary at one of the sharp diamond vertices (where $\\theta_j = 0$). For Ridge, intersections occur anywhere along the smooth spherical surface, shrinking coefficients toward zero without making them exactly zero.\n</details>\n\n---\n\n### Q2: What is the Vanishing Gradient problem, and what are 4 distinct ways to solve it?\n<details>\n<summary>Click to reveal answer</summary>\n\n**Problem:** By the chain rule, gradients backpropagating through $L$ layers multiply partial derivatives $\\prod_{l=1}^L \\frac{\\partial \\mathbf{a}^{(l)}}{\\partial \\mathbf{z}^{(l)}}$. If activations are Sigmoid (max derivative 0.25) or Tanh, gradients diminish exponentially toward early layers, freezing weight updates.\n\n**4 Solutions:**\n1. **Non-saturating activation functions**: Use ReLU, LeakyReLU, or GELU whose derivative is 1 for positive activations.\n2. **Residual Skip Connections (ResNets)**: Allows gradient flow to bypass layers via identity connections $\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{x}} = \\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{y}}(1 + \\dots)$.\n3. **Careful Weight Initialization**: He/Kaiming initialization ($\\text{Var}(W) = \\frac{2}{n_{\\text{in}}}$) for ReLU, Xavier/Glorot for Sigmoid/Tanh.\n4. **Normalization Layers**: Batch Normalization, Layer Normalization, or RMSNorm.\n</details>\n\n---\n\n### Q3: How do you choose between Precision and Recall for a real-world system?\n<details>\n<summary>Click to reveal answer</summary>\n\n- Prioritize **Recall** ($\\frac{\\text{TP}}{\\text{TP} + \\text{FN}}$) when **False Negatives are unacceptably hazardous**:\n  - Medical disease diagnosis (failing to diagnose a patient who is sick can be fatal).\n  - Fraud detection (failing to catch a multi-million-dollar money laundering transaction).\n  - Airport security bag scanning.\n- Prioritize **Precision** ($\\frac{\\text{TP}}{\\text{TP} + \\text{FP}}$) when **False Positives damage user trust or incur heavy costs**:\n  - Email spam filtering (marking an urgent boss email as spam causes chaos).\n  - Recommender systems & video auto-play (showing irrelevant recommendations drives churn).\n  - Autonomous emergency brake triggers (braking abruptly on a clear highway causes crashes).\n</details>\n\n---\n\n### Q4: Why does XGBoost perform better than standard Gradient Boosting?\n<details>\n<summary>Click to reveal answer</summary>\n\n1. **Second-Order Taylor Approximation**: Uses both first derivative (gradient $g$) and second derivative (Hessian $h$) for optimal split finding.\n2. **Built-in Regularization**: Objective includes $\\Omega(f) = \\gamma T + \\frac{1}{2}\\lambda \\sum w^2$, penalizing tree complexity and leaf weights directly.\n3. **Approximate Split Algorithm (Quantile Sketching)**: Evaluates candidate splits on percentiles rather than every unique feature value.\n4. **Sparsity-Aware Split Finding**: Learns optimal default split directions for missing values.\n5. **Parallel & Cache-Conscious Architecture**: Block structures in memory maximize CPU cache hits and multithreading.\n</details>\n\n---\n\n### Q5: How do you handle severe class imbalance (1:1000)?\n<details>\n<summary>Click to reveal answer</summary>\n\n1. **Resampling**:\n   - Oversampling minority class using SMOTE (Synthetic Minority Over-sampling Technique).\n   - Under-sampling majority class using Tomek Links or cluster centroids.\n2. **Cost-Sensitive Learning / Class Weights**:\n   - Scale loss by inverse class frequencies (e.g. `class_weight='balanced'` in scikit-learn, focal loss in neural nets).\n3. **Threshold Calibration**:\n   - Don't use the default 0.5 decision threshold; calibrate threshold using PR-AUC (Precision-Recall curve).\n4. **Algorithm Choice**:\n   - Use tree ensembles (XGBoost with `scale_pos_weight`) or anomaly detection (Isolation Forests, One-Class SVM).\n</details>\n\n---\n\n## 2. Additional Reference Notes\nReview the complete handwritten lecture notes in our repository:\n- `Machine Learning CheatSheet .pdf`\n- `Machine Learning Handwritten Notes.pdf`\n- `Machine Learning Part_1.pdf`\n- `Machine Learning.pdf`\n",
+  "frontmatter": {
+    "title": "Top Machine Learning Interview Questions & Flashcards",
+    "subject": "20-Interview-Preparation",
+    "difficulty": "Advanced",
+    "tags": [
+      "interview",
+      "questions",
+      "flashcards",
+      "faang",
+      "cheat-sheet",
+      "system-design"
+    ],
+    "prerequisites": [
+      "06-Supervised-Learning",
+      "09-Model-Evaluation",
+      "11-Deep-Learning"
+    ],
+    "description": "High-frequency machine learning interview questions asked at top tech companies, covering algorithmic trade-offs, mathematical derivations, and practical debugging scenarios."
+  }
+}

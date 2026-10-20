@@ -1,0 +1,27 @@
+{
+  "id": "pdf-machine-learning",
+  "title": "Machine Learning (Reference PDF)",
+  "subjectId": "20-Interview-Preparation",
+  "format": "pdf",
+  "fileName": "Machine Learning.pdf",
+  "relativePath": "Machine Learning.pdf",
+  "githubBlobUrl": "https://github.com/codexshami/MLVault/blob/main/Machine%20Learning.pdf",
+  "githubRawUrl": "https://github.com/codexshami/MLVault/raw/main/Machine%20Learning.pdf",
+  "difficulty": "Reference",
+  "tags": [
+    "pdf",
+    "notes",
+    "handbook",
+    "reference"
+  ],
+  "prerequisites": [],
+  "description": "Original study notes and PDF reference document (36.2 MB).",
+  "estimatedMinutes": 180,
+  "headings": [],
+  "searchTokens": "Machine Learning pdf notes reference 20-Interview-Preparation",
+  "hasNotebook": false,
+  "sizeBytes": 37946409,
+  "sizeMB": 36.19,
+  "pdfUrl": "https://github.com/codexshami/MLVault/raw/main/Machine%20Learning.pdf",
+  "localPath": "Machine Learning.pdf"
+}

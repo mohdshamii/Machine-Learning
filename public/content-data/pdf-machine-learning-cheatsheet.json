@@ -1,0 +1,27 @@
+{
+  "id": "pdf-machine-learning-cheatsheet",
+  "title": "Machine Learning CheatSheet (Reference PDF)",
+  "subjectId": "20-Interview-Preparation",
+  "format": "pdf",
+  "fileName": "Machine Learning CheatSheet .pdf",
+  "relativePath": "Machine Learning CheatSheet .pdf",
+  "githubBlobUrl": "https://github.com/codexshami/MLVault/blob/main/Machine%20Learning%20CheatSheet%20.pdf",
+  "githubRawUrl": "https://github.com/codexshami/MLVault/raw/main/Machine%20Learning%20CheatSheet%20.pdf",
+  "difficulty": "Reference",
+  "tags": [
+    "pdf",
+    "notes",
+    "handbook",
+    "reference"
+  ],
+  "prerequisites": [],
+  "description": "Original study notes and PDF reference document (7.4 MB).",
+  "estimatedMinutes": 36,
+  "headings": [],
+  "searchTokens": "Machine Learning CheatSheet pdf notes reference 20-Interview-Preparation",
+  "hasNotebook": false,
+  "sizeBytes": 7729306,
+  "sizeMB": 7.37,
+  "pdfUrl": "https://github.com/codexshami/MLVault/raw/main/Machine%20Learning%20CheatSheet%20.pdf",
+  "localPath": "Machine Learning CheatSheet .pdf"
+}
