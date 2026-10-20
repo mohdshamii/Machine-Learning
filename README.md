@@ -1,8 +1,8 @@
 # MLVault - Machine Learning tutorial plateform
 > An interactive, expandable Machine Learning study hub and Jupyter-inspired workspace, built with React, Vite, and TypeScript. Ready for instant deployment on GitHub Pages.
 
-**Author:** [Mohd Shami](https://github.com/codexshami)  
-**Repository:** [codexshami/MLVault](https://github.com/codexshami/MLVault)  
+**Author:** [Mohd Shami](https://github.com/mohdshamii)  
+**Repository:** [codexshami/MLVault](https://github.com/mohdshamii.github.io/Machine-Learning)  
 **Live Site:** Hosted on GitHub Pages via automated GitHub Actions
 
 ---
