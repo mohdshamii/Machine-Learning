@@ -1,4 +1,4 @@
-# MLVault 🧠
+# MLVault - Machine Learning tutorial plateform
 > An interactive, expandable Machine Learning study hub and Jupyter-inspired workspace, built with React, Vite, and TypeScript. Ready for instant deployment on GitHub Pages.
 
 **Author:** [Mohd Shami](https://github.com/codexshami)  
@@ -7,7 +7,7 @@
 
 ---
 
-## 🌟 Highlights & Features
+## Highlights & Features
 
 - **Jupyter Notebook-Inspired UI:**
   - Authentic notebook workspace aesthetics with clean borders, typography, and muted metadata.
@@ -29,7 +29,7 @@
 
 ---
 
-## 📂 Repository & Folder Organization
+## Repository & Folder Organization
 
 ```text
 machinelearning/
@@ -93,7 +93,7 @@ machinelearning/
 
 ---
 
-## 🚀 How to Add New Content (Automated Discovery)
+## How to Add New Content (Automated Discovery)
 
 This repository is built for long-term growth. Adding new study notes or Jupyter notebooks requires **no code changes**:
 
@@ -127,7 +127,7 @@ The new lesson will automatically appear in the course tree, global search index
 
 ---
 
-## 💻 Local Development Workflow
+## Local Development Workflow
 
 ### Prerequisites
 - Node.js (v18+)
@@ -135,8 +135,8 @@ The new lesson will automatically appear in the course tree, global search index
 
 ### Installation
 ```bash
-git clone https://github.com/codexshami/MLVault.git
-cd MLVault
+git clone https://github.com/mohdshamii.github.io/Machine-Learning.git
+cd machinelearning
 npm install
 ```
 
@@ -154,7 +154,7 @@ npm run preview
 
 ---
 
-## 🌐 GitHub Pages Deployment
+##  GitHub Pages Deployment
 
 The repository includes a production GitHub Actions workflow in `.github/workflows/deploy.yml`.
 
@@ -170,12 +170,12 @@ To deploy automatically:
    - Under **Build and deployment** > **Source**, select **GitHub Actions**.
 3. GitHub Actions will automatically index content, build the static bundle, and deploy to:
    ```text
-   https://codexshami.github.io/MLVault/
+   https://mohdshamii.github.io/Machine-Learning/
    ```
 
 ---
 
-## 📝 Quality & Compatibility Guarantee
+##  Quality & Compatibility Guarantee
 
 - **Relative Paths:** Uses `./` base resolution to prevent broken styles or 404 script errors regardless of whether deployed to a custom domain or a repository subdirectory (`/MLVault/`).
 - **Safe Rendering:** Notebook HTML and SVG outputs are sanitized; scripts are not executed.
@@ -184,5 +184,5 @@ To deploy automatically:
 
 ---
 
-## 📄 License
+##  License
 Curated for personal and community learning. Original study materials and notes are credited to their respective authors and [Mohd Shami](https://github.com/codexshami).
